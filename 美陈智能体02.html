@@ -236,6 +236,39 @@
             box-shadow: 0 0 14px rgba(201, 164, 92, 0.5);
             text-shadow: 0 1px 2px rgba(255, 255, 255, 0.2);
         }
+        /* 色彩按钮专用样式：色块+文字 */
+        .color-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px 6px 8px;
+            background: rgba(30, 30, 28, 0.7);
+            border: 1px solid rgba(90, 80, 64, 0.7);
+            border-radius: 32px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 11.5px;
+            color: #e6ddc5;
+        }
+        .color-btn:hover {
+            border-color: #c9a45c;
+            background: rgba(201, 164, 92, 0.15);
+            transform: translateY(-1px);
+        }
+        .color-btn.selected {
+            background: linear-gradient(135deg, #c9a45c, #b8943a);
+            color: #1e1b16;
+            border-color: #c9a45c;
+            font-weight: 500;
+        }
+        .color-swatch {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
         .opt-btn.series-btn {
             padding: 9px 16px;
             font-size: 12.5px;
@@ -497,7 +530,7 @@
             font-size: 11.5px;
             line-height: 1.65;
         }
-        /* ---------- 优化核心元素区域：网格布局，避免叠加，比例美观 ---------- */
+        /* 核心元素网格样式 */
         .element-picker {
             background: rgba(0,0,0,0.25);
             border-radius: 24px;
@@ -614,7 +647,6 @@
                 <h1 id="mainTitle">🏮 商业美陈AI提示词 · 设计总监版</h1>
                 <span class="subtitle" id="subtitleText">正立面视角 · 20组方案 · 全风格覆盖</span>
             </div>
-            <!-- 项目描述图框 -->
             <div class="project-desc-frame" id="projectDescFrame">
                 <div class="frame-item">
                     <span class="frame-label">项目描述</span>
@@ -623,7 +655,6 @@
             </div>
         </div>
         <div class="main">
-            <!-- 输入区 (左侧) -->
             <div class="input-section" id="inputPanel">
                 <div>
                     <div class="section-title"><span>📝</span> 项目描述 <span style="font-size:10px;color:#9b927a;">(动态更新主标题图框)</span></div>
@@ -656,8 +687,9 @@
                     <div class="selected-elem-area" id="selectedElemDisplay">当前选中元素: 祥云 · 如意纹 · 牡丹</div>
                     <button id="clearElemBtn" class="clear-elem">🗑️ 清空所有元素</button>
                 </div>
+                <!-- 色彩体系：色块+文字 多选按钮 -->
                 <div>
-                    <div class="section-title"><span>🌈</span> 色彩体系 (多选)</div>
+                    <div class="section-title"><span>🌈</span> 色彩体系 (多选 · 色块+文字)</div>
                     <div class="btn-row" id="colorBtns"></div>
                 </div>
                 <div>
@@ -725,7 +757,6 @@
                 </div>
                 <button class="generate-btn" id="generateBtn">✨ 生成 20 组提示词 ✨</button>
             </div>
-            <!-- 输出区 (右侧) -->
             <div class="output-section" id="outputSection">
                 <div class="output-header">
                     <h2>🎐 正立面美陈 · AI绘画提示词</h2>
@@ -749,7 +780,7 @@
     </div>
     <script>
         (function() {
-            // ========== 数据定义 (完整元素库) ==========
+            // ========== 数据定义 ==========
             const fullElementsLibrary = {
                 "吉祥类": ["祥云","如意纹","回纹","瑞兽纹","八宝纹","金元宝","铜钱","福袋","福字","财字","招财猫","聚宝盆","玉佩","印章","宫灯","华盖","龙纹","凤纹","麒麟","貔貅","仙鹤","锦鲤","金鱼"],
                 "花卉类": ["牡丹","梅花","兰花","竹子","菊花","荷花","桃花","樱花","山茶花","桂花","银杏叶","枫叶"],
@@ -762,6 +793,7 @@
                 "艺术装置": ["镜面不锈钢","气膜装置","悬浮雕塑","几何艺术体","动态风车","风动装置","镜面球","光影雕塑","巨型字母","艺术拱门","异形结构","参数化曲面"]
             };
             
+            // 色彩体系：全部颜色名称列表（含色块）
             const colorFullList = [
                 "中国红","帝王黄","宝石蓝","孔雀绿","翡翠绿","松石绿","深海蓝","星空黑","珍珠白","奶油白","雾霾灰","银灰色","香槟金","古铜金","玫瑰金","哑光黑",
                 "红金配色","黑金配色","朱砂红+鎏金","中国红+祥云金","故宫红+琉璃黄","赤金色","龙鳞金","宫廷蓝金","墨绿色+古金","丹霞橙+金",
@@ -772,6 +804,53 @@
                 "莫兰迪粉","莫兰迪蓝","莫兰迪绿","雾灰紫","奶咖灰","烟灰蓝","浅豆沙","米杏色","低饱和橄榄绿",
                 "蓝紫渐变","粉紫渐变","红橙渐变","金橙渐变","青蓝渐变","极光渐变","彩虹渐变","日落渐变"
             ];
+            
+            // 颜色到色块背景的映射函数
+            function getColorSwatchBg(colorName) {
+                const colorMap = {
+                    "中国红": "#C41E3A", "帝王黄": "#FFB300", "宝石蓝": "#0F52BA", "孔雀绿": "#228B22", "翡翠绿": "#50C878",
+                    "松石绿": "#40E0D0", "深海蓝": "#003366", "星空黑": "#1A1A1A", "珍珠白": "#F5F5F5", "奶油白": "#FFFDD0",
+                    "雾霾灰": "#8B8682", "银灰色": "#C0C0C0", "香槟金": "#F7E7CE", "古铜金": "#B87333", "玫瑰金": "#B76E79",
+                    "哑光黑": "#2C2C2C", "红金配色": "linear-gradient(135deg, #C41E3A, #FFD700)", "黑金配色": "linear-gradient(135deg, #1A1A1A, #FFD700)",
+                    "朱砂红+鎏金": "linear-gradient(135deg, #E34234, #F1C40F)", "中国红+祥云金": "linear-gradient(135deg, #E32636, #FFD700)",
+                    "故宫红+琉璃黄": "linear-gradient(135deg, #C0392B, #F1C40F)", "赤金色": "#D4AF37", "龙鳞金": "#E6C300",
+                    "宫廷蓝金": "linear-gradient(135deg, #1E3A8A, #D4AF37)", "墨绿色+古金": "linear-gradient(135deg, #1E4D2E, #C5A059)",
+                    "丹霞橙+金": "linear-gradient(135deg, #FF7F50, #FFD700)", "黑金": "linear-gradient(135deg, #222, #FFD700)",
+                    "白金": "linear-gradient(135deg, #E0E0E0, #FFFFFF)", "深咖金": "linear-gradient(135deg, #6F4E37, #D4AF37)",
+                    "酒红金": "linear-gradient(135deg, #722F37, #FFD700)", "宝石蓝金": "linear-gradient(135deg, #0F52BA, #FFD700)",
+                    "翡翠绿金": "linear-gradient(135deg, #50C878, #FFD700)", "银黑配色": "linear-gradient(135deg, #2C2C2C, #C0C0C0)",
+                    "深紫金": "linear-gradient(135deg, #4B0082, #D4AF37)", "暗夜蓝银": "linear-gradient(135deg, #0A192F, #C0C0C0)",
+                    "电光蓝": "#00FFFF", "赛博紫": "#BF00FF", "荧光青": "#00FFCC", "激光粉": "#FF69B4", "银河银": "#E0E6ED",
+                    "数据蓝": "#2A52BE", "冰川白": "#E8F0F8", "极光渐变": "linear-gradient(135deg, #00FF88, #00BFFF)", "蓝紫渐变": "linear-gradient(135deg, #4169E1, #8A2BE2)",
+                    "镭射彩虹色": "linear-gradient(135deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3)",
+                    "马卡龙粉": "#FFB6C1", "蜜桃橙": "#FFCBA4", "奶油黄": "#FFFACD", "湖水蓝": "#7FFFD4", "薄荷绿": "#98FB98",
+                    "樱花粉": "#FFC0CB", "香芋紫": "#C3B1E1", "云朵白": "#F0FFFF", "糖果彩虹": "linear-gradient(135deg, #FFB7B2, #FFDAC1, #E2F0CB, #B5EAD7, #C7CEEA)",
+                    "冰淇淋渐变": "linear-gradient(135deg, #FFB3BA, #C5E99B, #B5EAD7, #A0E7E5)",
+                    "苔藓绿": "#4A5D23", "森林绿": "#228B22", "原木棕": "#8B5A2B", "岩石灰": "#6A5A4F", "湖泊蓝": "#3F6A8A",
+                    "雾森白": "#E8EAE6", "枫叶红": "#C23B22", "泥土棕": "#7B4A2E", "山野绿": "#5E8C5A", "草木青": "#8DB600",
+                    "莫兰迪粉": "#DDBEA9", "莫兰迪蓝": "#9FB6CD", "莫兰迪绿": "#B2C9AB", "雾灰紫": "#C6C2D4", "奶咖灰": "#C2B280",
+                    "烟灰蓝": "#6C7A89", "浅豆沙": "#D9B8A8", "米杏色": "#EED9B0", "低饱和橄榄绿": "#A5B68A",
+                    "粉紫渐变": "linear-gradient(135deg, #FFB6C1, #DDA0DD)", "红橙渐变": "linear-gradient(135deg, #FF4500, #FF8C00)",
+                    "金橙渐变": "linear-gradient(135deg, #FFD700, #FF8C00)", "青蓝渐变": "linear-gradient(135deg, #00CED1, #1E90FF)",
+                    "彩虹渐变": "linear-gradient(135deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3)",
+                    "日落渐变": "linear-gradient(135deg, #FF7E5F, #FEB47B)"
+                };
+                if (colorMap[colorName]) return colorMap[colorName];
+                // 默认根据名称中的颜色词简单匹配
+                if (colorName.includes("红")) return "#DC143C";
+                if (colorName.includes("金")) return "#FFD700";
+                if (colorName.includes("蓝")) return "#4169E1";
+                if (colorName.includes("绿")) return "#2E8B57";
+                if (colorName.includes("白")) return "#F0F0F0";
+                if (colorName.includes("黑")) return "#2F2F2F";
+                if (colorName.includes("灰")) return "#A9A9A9";
+                if (colorName.includes("紫")) return "#9370DB";
+                if (colorName.includes("橙")) return "#FF8C00";
+                if (colorName.includes("黄")) return "#FFD700";
+                if (colorName.includes("粉")) return "#FFB6C1";
+                if (colorName.includes("渐变")) return "linear-gradient(135deg, #FFD700, #FF69B4)";
+                return "#CCCCCC";
+            }
             
             const materialFullList = ["亚克力","镜面不锈钢","拉丝不锈钢","铝板","KT板","PVC","木饰面","发光灯膜","透光布","软膜天花","玻璃钢","树脂","水晶材质","镭射膜","LED屏","雾化玻璃","气模","仿真花艺","竹艺","布艺","纸艺","水波纹不锈钢","发光树脂","数字屏幕","AI动态屏"];
             const lightFullList = ["洗墙灯","线性灯","点光源","霓虹灯","发光字","星空灯","水波纹灯","激光灯","动态追光","呼吸灯","光纤灯","氛围投影","互动感应灯","地面投影","轮廓暖黄灯带","内透光","霓虹灯带","全息投影灯"];
@@ -833,6 +912,7 @@
             let selectedInstallSet = new Set(['可拆卸']);
             let selectedTimeSet = new Set(['白天效果']);
             
+            // 通用多选渲染（普通按钮）
             function renderMultiSelect(containerId, options, selectedSet, onChange) {
                 const container = document.getElementById(containerId);
                 if(!container) return;
@@ -849,6 +929,31 @@
                     });
                 });
             }
+            // 色彩多选渲染（带色块）
+            function renderColorMultiSelect() {
+                const container = document.getElementById('colorBtns');
+                if(!container) return;
+                container.innerHTML = colorFullList.map(color => {
+                    const bg = getColorSwatchBg(color);
+                    const isSelected = selectedColorSet.has(color);
+                    // 处理渐变色背景的 swatch 特殊样式
+                    const swatchStyle = bg.includes('linear-gradient') ? `background: ${bg};` : `background-color: ${bg};`;
+                    return `<button class="color-btn ${isSelected ? 'selected' : ''}" data-value="${color.replace(/"/g, '&quot;')}">
+                                <span class="color-swatch" style="${swatchStyle}"></span>
+                                <span>${color}</span>
+                            </button>`;
+                }).join('');
+                container.querySelectorAll('.color-btn').forEach(btn => {
+                    const val = btn.dataset.value;
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if(selectedColorSet.has(val)) selectedColorSet.delete(val);
+                        else selectedColorSet.add(val);
+                        renderColorMultiSelect(); // 重新渲染以更新选中状态
+                        refreshAllSelections();
+                    });
+                });
+            }
             function refreshSelections(containerId, selectedSet) {
                 const container = document.getElementById(containerId);
                 if(!container) return;
@@ -856,6 +961,24 @@
                     if(selectedSet.has(btn.dataset.value)) btn.classList.add('selected');
                     else btn.classList.remove('selected');
                 });
+            }
+            function refreshAllSelections() {
+                refreshSelections('seriesBtns', selectedSeriesSet);
+                refreshSelections('subStyleBtns', selectedSubStyleSet);
+                refreshSelections('styleTagBtns', selectedStyleTagSet);
+                refreshSelections('venueBtns', selectedVenueSet);
+                // 色彩已通过重新渲染处理，跳过
+                refreshSelections('materialBtns', selectedMaterialSet);
+                refreshSelections('lightBtns', selectedLightSet);
+                refreshSelections('lightEffectBtns', selectedLightEffectSet);
+                refreshSelections('structureBtns', selectedStructureSet);
+                refreshSelections('interactionPrefBtns', selectedInteractionPrefSet);
+                refreshSelections('contentTypeBtns', selectedContentTypeSet);
+                refreshSelections('storyBtns', selectedStorySet);
+                refreshSelections('interactBtns', selectedInteractSet);
+                refreshSelections('budgetBtns', selectedBudgetSet);
+                refreshSelections('installBtns', selectedInstallSet);
+                refreshSelections('timeBtns', selectedTimeSet);
             }
             
             function renderSubStyleMulti() {
@@ -879,7 +1002,6 @@
                 });
             }
             
-            // 优化后的核心元素渲染：使用网格布局，避免叠加
             function renderCoreElementPanel() {
                 let html = '';
                 for(let [cat, items] of Object.entries(fullElementsLibrary)) {
@@ -920,7 +1042,7 @@
                 renderSubStyleMulti();
                 renderMultiSelect('styleTagBtns', styleTagList, selectedStyleTagSet, null);
                 renderMultiSelect('venueBtns', venueFullList, selectedVenueSet, null);
-                renderMultiSelect('colorBtns', colorFullList, selectedColorSet, null);
+                renderColorMultiSelect();  // 带色块的色彩多选
                 renderMultiSelect('materialBtns', materialFullList, selectedMaterialSet, null);
                 renderMultiSelect('lightBtns', lightFullList, selectedLightSet, null);
                 renderMultiSelect('lightEffectBtns', lightEffectModes, selectedLightEffectSet, null);
