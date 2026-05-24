@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>商业美陈AI提示词 · 设计总监版 | 全风格覆盖</title>
+    <title>商业美陈AI提示词 · 设计总监版 | 自由多选·无默认强加</title>
     <style>
         :root {
             --bg: #1a1a1a;
@@ -19,11 +19,7 @@
             --font-heading: 'PingFang SC', 'Microsoft YaHei', 'SimHei', sans-serif;
             --font-body: 'PingFang SC', 'Microsoft YaHei', '楷体', serif;
         }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: radial-gradient(circle at 20% 30%, #2a2318 0%, #1a1714 80%);
             font-family: var(--font-body);
@@ -38,7 +34,6 @@
             width: 100%;
             background: rgba(36, 36, 34, 0.85);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             border-radius: 48px;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(201, 164, 92, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             overflow: hidden;
@@ -51,1168 +46,416 @@
             display: flex;
             flex-direction: column;
             gap: 14px;
-            backdrop-filter: blur(8px);
         }
-        .header-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 14px;
-        }
-        .header h1 {
-            font-size: 26px;
-            font-weight: 600;
-            letter-spacing: 2.5px;
-            background: linear-gradient(180deg, #f5e7c6 0%, #c9a45c 80%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
-            font-family: var(--font-heading);
-            white-space: nowrap;
-        }
-        .header .subtitle {
-            font-size: 13px;
-            color: #cfc3a6;
-            font-weight: 300;
-            font-style: italic;
-            letter-spacing: 1.5px;
-            background: rgba(201, 164, 92, 0.08);
-            padding: 7px 20px;
-            border-radius: 30px;
-            border: 1px solid rgba(201, 164, 92, 0.35);
-            white-space: nowrap;
-        }
-        /* 项目描述图框 */
-        .project-desc-frame {
-            background: rgba(20, 18, 14, 0.8);
-            backdrop-filter: blur(12px);
-            border: 2px solid rgba(201, 164, 92, 0.45);
-            border-radius: 22px;
-            padding: 16px 26px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-            box-shadow: inset 0 0 18px rgba(201, 164, 92, 0.08), 0 6px 16px rgba(0, 0, 0, 0.5);
-            background-image: linear-gradient(135deg, rgba(201, 164, 92, 0.04) 0%, transparent 50%);
-        }
-        .frame-item {
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-        }
-        .frame-label {
-            font-size: 11px;
-            color: #9b927a;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-        .frame-value {
-            font-size: 19px;
-            font-weight: 600;
-            color: #ecd69b;
-            letter-spacing: 2px;
-            font-family: var(--font-heading);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
-            border-bottom: 2px dashed rgba(201, 164, 92, 0.45);
-            padding-bottom: 2px;
-            transition: all 0.3s ease;
-        }
-        .frame-divider {
-            width: 1px;
-            height: 32px;
-            background: linear-gradient(to bottom, transparent, #c9a45c, transparent);
-        }
-        .main {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .input-section {
-            flex: 1;
-            min-width: 440px;
-            background: rgba(42, 42, 38, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 26px 22px;
-            border-right: 1px solid rgba(74, 63, 46, 0.5);
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-        .output-section {
-            flex: 1;
-            min-width: 440px;
-            background: rgba(31, 30, 27, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 26px 28px;
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-        .input-section::-webkit-scrollbar {
-            width: 5px;
-        }
-        .input-section::-webkit-scrollbar-track {
-            background: #2a2822;
-            border-radius: 10px;
-        }
-        .input-section::-webkit-scrollbar-thumb {
-            background: #5a5240;
-            border-radius: 10px;
-        }
-        .output-section::-webkit-scrollbar {
-            width: 6px;
-        }
-        .output-section::-webkit-scrollbar-track {
-            background: #2a2822;
-            border-radius: 10px;
-        }
-        .output-section::-webkit-scrollbar-thumb {
-            background: #5a5240;
-            border-radius: 10px;
-        }
-        .section-title {
-            font-size: 16px;
-            font-weight: 500;
-            color: #ecd69b;
-            padding-bottom: 9px;
-            border-bottom: 1.5px solid rgba(201, 164, 92, 0.35);
-            font-family: var(--font-heading);
-            letter-spacing: 1.6px;
-            display: flex;
-            align-items: center;
-            gap: 7px;
-        }
-        .btn-group-label {
-            font-size: 11px;
-            font-weight: 500;
-            color: #c4b393;
-            margin-bottom: 5px;
-            letter-spacing: 0.7px;
-            text-transform: uppercase;
-            opacity: 0.9;
-        }
-        .btn-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-bottom: 3px;
-        }
-        .opt-btn {
-            padding: 8px 14px;
-            font-size: 11.5px;
-            background: rgba(30, 30, 28, 0.6);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(90, 80, 64, 0.7);
-            border-radius: 22px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            font-family: var(--font-body);
-            color: #c4b393;
-            white-space: nowrap;
-            user-select: none;
-            outline: none;
-            letter-spacing: 0.4px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        .opt-btn:hover {
-            border-color: #c9a45c;
-            color: #e5c67a;
-            background: rgba(201, 164, 92, 0.12);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-        }
-        .opt-btn.selected {
-            background: linear-gradient(135deg, #c9a45c, #b8943a);
-            color: #1e1b16;
-            border-color: #c9a45c;
-            font-weight: 600;
-            box-shadow: 0 0 14px rgba(201, 164, 92, 0.5);
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.2);
-        }
-        /* 色彩按钮专用样式：色块+文字 */
-        .color-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 12px 6px 8px;
-            background: rgba(30, 30, 28, 0.7);
-            border: 1px solid rgba(90, 80, 64, 0.7);
-            border-radius: 32px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 11.5px;
-            color: #e6ddc5;
-        }
-        .color-btn:hover {
-            border-color: #c9a45c;
-            background: rgba(201, 164, 92, 0.15);
-            transform: translateY(-1px);
-        }
-        .color-btn.selected {
-            background: linear-gradient(135deg, #c9a45c, #b8943a);
-            color: #1e1b16;
-            border-color: #c9a45c;
-            font-weight: 500;
-        }
-        .color-swatch {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        .opt-btn.series-btn {
-            padding: 9px 16px;
-            font-size: 12.5px;
-            border-radius: 22px;
-            font-weight: 500;
-            letter-spacing: 0.9px;
-        }
-        .opt-btn.sub-btn {
-            font-size: 11px;
-            padding: 7px 13px;
-            border-radius: 16px;
-        }
-        .collapse-header {
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 7px 0;
-            user-select: none;
-        }
-        .collapse-header .arrow {
-            transition: transform 0.3s ease;
-            font-size: 13px;
-            color: #c9a45c;
-        }
-        .collapse-header.open .arrow {
-            transform: rotate(90deg);
-        }
-        .collapse-body {
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .collapse-body.expanded {
-            max-height: 800px;
-        }
-        .input-row {
-            display: flex;
-            gap: 10px;
-            align-items: flex-end;
-            flex-wrap: wrap;
-        }
-        .input-field {
-            flex: 1;
-            min-width: 130px;
-        }
-        .input-field label {
-            display: block;
-            font-size: 11px;
-            color: #c4b393;
-            margin-bottom: 3px;
-            letter-spacing: 0.5px;
-        }
-        .input-field input,
-        .input-field textarea {
-            width: 100%;
-            padding: 11px 13px;
-            font-size: 13.5px;
-            background: rgba(30, 30, 28, 0.8);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(74, 64, 48, 0.7);
-            border-radius: 22px;
-            font-family: var(--font-body);
-            color: #e6ddc5;
-            outline: none;
-            transition: 0.25s;
-            resize: vertical;
-        }
-        .input-field textarea {
-            min-height: 72px;
-            line-height: 1.6;
-        }
-        .input-field input:focus,
-        .input-field textarea:focus {
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(201, 164, 92, 0.13);
-            background: #24241f;
-        }
-        .lock-option {
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            margin-top: 5px;
-            color: #c4b393;
-            font-size: 11.5px;
-        }
-        .lock-option input[type="checkbox"] {
-            width: 15px;
-            height: 15px;
-            accent-color: var(--gold);
-        }
-        .generate-btn {
-            background: linear-gradient(135deg, #c94f33 0%, #a83524 100%);
-            border: none;
-            width: 100%;
-            padding: 16px;
-            font-size: 21px;
-            font-weight: 600;
-            color: #fff6e5;
-            letter-spacing: 4.5px;
-            border-radius: 38px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid var(--gold);
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-            font-family: var(--font-heading);
-            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4), 0 0 18px rgba(201, 164, 92, 0.2);
-            margin-top: 6px;
-        }
-        .generate-btn:hover {
-            background: linear-gradient(135deg, #dc5a3d 0%, #b8402a 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 16px 30px rgba(180, 100, 50, 0.35);
-            border-bottom-color: #e6c97e;
-        }
-        .output-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .output-header h2 {
-            font-size: 20px;
-            font-weight: 500;
-            color: #e5d5a5;
-            font-family: var(--font-heading);
-            letter-spacing: 1.8px;
-        }
-        .badge {
-            background: rgba(62, 53, 36, 0.7);
-            backdrop-filter: blur(8px);
-            color: #e5c67a;
-            padding: 7px 20px;
-            border-radius: 26px;
-            font-size: 13.5px;
-            font-weight: 600;
-            border: 1px solid rgba(107, 90, 57, 0.7);
-        }
-        .prompts-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .prompt-item {
-            background: rgba(43, 42, 36, 0.8);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(68, 62, 47, 0.6);
-            border-radius: 26px;
-            padding: 20px 24px 16px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
-            display: flex;
-            flex-direction: column;
-        }
-        .prompt-item:hover {
-            border-color: #c9a45c;
-            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.6), 0 0 18px rgba(201, 164, 92, 0.2);
-            background: rgba(48, 46, 39, 0.9);
-            transform: translateY(-2px);
-        }
-        .prompt-number {
-            font-size: 12.5px;
-            font-weight: 600;
-            color: #e5c67a;
-            letter-spacing: 0.9px;
-            margin-bottom: 9px;
-            background: rgba(59, 53, 36, 0.8);
-            display: inline-block;
-            padding: 5px 16px;
-            border-radius: 20px;
-            border: 1px solid rgba(104, 95, 62, 0.7);
-            align-self: flex-start;
-        }
-        .prompt-text {
-            font-size: 13.5px;
-            line-height: 1.75;
-            color: #d9d0b5;
-            margin-bottom: 12px;
-            word-break: break-word;
-            flex: 1;
-            user-select: text;
-        }
-        .prompt-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-bottom: 9px;
-        }
-        .meta-tag {
-            font-size: 10.5px;
-            padding: 3px 10px;
-            border-radius: 13px;
-            background: rgba(201, 164, 92, 0.12);
-            color: #b8a87a;
-            border: 1px solid rgba(201, 164, 92, 0.3);
-            white-space: nowrap;
-        }
-        .copy-btn {
-            background: transparent;
-            color: #c9a45c;
-            border: 1px solid rgba(201, 164, 92, 0.7);
-            border-radius: 22px;
-            padding: 7px 18px;
-            font-size: 12.5px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.25s;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            letter-spacing: 0.5px;
-            align-self: flex-start;
-            user-select: none;
-            outline: none;
-            backdrop-filter: blur(4px);
-        }
-        .copy-btn:hover {
-            background: #c9a45c;
-            color: #1e1b16;
-            box-shadow: 0 0 10px rgba(201, 164, 92, 0.5);
-        }
-        .copy-btn:active {
-            transform: scale(0.96);
-        }
-        .copy-btn.copied {
-            background: #4a7c59;
-            color: #f0f2e9;
-            border-color: #5a8f68;
-            pointer-events: none;
-        }
-        .footer-note {
-            margin-top: 22px;
-            font-size: 12.5px;
-            color: #9b927a;
-            text-align: right;
-            border-top: 1px solid rgba(61, 56, 40, 0.6);
-            padding-top: 16px;
-            font-style: italic;
-            letter-spacing: 0.5px;
-        }
-        .extra-output {
-            margin-top: 16px;
-            background: rgba(38, 36, 30, 0.7);
-            backdrop-filter: blur(8px);
-            border-radius: 18px;
-            padding: 16px 20px;
-            border: 1px dashed rgba(74, 64, 48, 0.7);
-        }
-        .extra-output h4 {
-            color: #e5c67a;
-            font-size: 13.5px;
-            margin-bottom: 7px;
-            letter-spacing: 1px;
-        }
-        .extra-output p {
-            color: #b8b0a0;
-            font-size: 11.5px;
-            line-height: 1.65;
-        }
-        /* 核心元素网格样式 */
-        .element-picker {
-            background: rgba(0,0,0,0.25);
-            border-radius: 24px;
-            padding: 16px;
-            margin: 8px 0;
-            max-height: 380px;
-            overflow-y: auto;
-        }
-        .ele-cat {
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(201,164,92,0.2);
-            padding-bottom: 12px;
-        }
-        .ele-cat-title {
-            font-size: 13px;
-            color: #ecd69b;
-            margin: 6px 0 12px 0;
-            font-weight: 600;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .ele-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(88px, auto));
-            gap: 8px;
-            margin-top: 6px;
-        }
-        .elem-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background: #2c2a24;
-            border: 1px solid #5a5240;
-            border-radius: 32px;
-            padding: 6px 12px;
-            font-size: 11px;
-            font-weight: 400;
-            cursor: pointer;
-            transition: 0.15s;
-            color: #cfc3a6;
-            text-align: center;
-            white-space: nowrap;
-        }
-        .elem-badge.selected {
-            background: linear-gradient(135deg, #c9a45c, #b8943a);
-            color: #1e1b16;
-            border-color: #c9a45c;
-            font-weight: 500;
-            box-shadow: 0 0 8px rgba(201,164,92,0.4);
-        }
-        .elem-badge:hover {
-            transform: translateY(-1px);
-            border-color: #e6c67a;
-            background: rgba(201,164,92,0.2);
-        }
-        .selected-elem-area {
-            background: #1e1e1c;
-            border-radius: 28px;
-            padding: 10px 16px;
-            margin-top: 12px;
-            font-size: 12px;
-            color: #ecd69b;
-            word-break: break-all;
-            border: 1px solid rgba(201,164,92,0.3);
-        }
-        .clear-elem {
-            background: #3d3524;
-            border: none;
-            border-radius: 32px;
-            padding: 5px 16px;
-            font-size: 11px;
-            margin-top: 8px;
-            margin-right: 8px;
-            cursor: pointer;
-            color: #f0e6cd;
-            transition: 0.2s;
-        }
-        .clear-elem:hover {
-            background: #5c4f34;
-        }
-        @media (max-width: 960px) {
-            .input-section {
-                flex: 1 1 100%;
-                min-width: 100%;
-                border-right: none;
-                border-bottom: 1px solid rgba(74, 63, 46, 0.5);
-            }
-            .output-section {
-                flex: 1 1 100%;
-                min-width: 100%;
-            }
-            .header h1 {
-                font-size: 22px;
-            }
-            .project-desc-frame {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .frame-divider {
-                display: none;
-            }
-            .ele-grid {
-                grid-template-columns: repeat(auto-fill, minmax(78px, auto));
-            }
-        }
+        .header-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+        .header h1 { font-size: 26px; font-weight: 600; letter-spacing: 2.5px; background: linear-gradient(180deg, #f5e7c6 0%, #c9a45c 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-family: var(--font-heading); white-space: nowrap; }
+        .header .subtitle { font-size: 13px; color: #cfc3a6; background: rgba(201, 164, 92, 0.08); padding: 7px 20px; border-radius: 30px; border: 1px solid rgba(201, 164, 92, 0.35); white-space: nowrap; }
+        .project-desc-frame { background: rgba(20, 18, 14, 0.8); backdrop-filter: blur(12px); border: 2px solid rgba(201, 164, 92, 0.45); border-radius: 22px; padding: 16px 26px; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+        .frame-item { display: flex; align-items: baseline; gap: 8px; }
+        .frame-label { font-size: 11px; color: #9b927a; letter-spacing: 1px; text-transform: uppercase; }
+        .frame-value { font-size: 19px; font-weight: 600; color: #ecd69b; letter-spacing: 2px; font-family: var(--font-heading); border-bottom: 2px dashed rgba(201, 164, 92, 0.45); }
+        .main { display: flex; flex-wrap: wrap; }
+        .input-section, .output-section { flex: 1; min-width: 440px; padding: 26px 22px; max-height: 85vh; overflow-y: auto; background: rgba(42, 42, 38, 0.7); backdrop-filter: blur(12px); }
+        .input-section { border-right: 1px solid rgba(74, 63, 46, 0.5); }
+        .section-title { font-size: 16px; font-weight: 500; color: #ecd69b; padding-bottom: 9px; border-bottom: 1.5px solid rgba(201, 164, 92, 0.35); font-family: var(--font-heading); letter-spacing: 1.6px; display: flex; align-items: center; gap: 7px; margin-top: 12px; }
+        .btn-row { display: flex; flex-wrap: wrap; gap: 7px; margin: 8px 0 6px; }
+        .opt-btn { padding: 8px 14px; font-size: 11.5px; background: rgba(30, 30, 28, 0.6); border: 1px solid rgba(90, 80, 64, 0.7); border-radius: 22px; cursor: pointer; color: #c4b393; transition: 0.2s; }
+        .opt-btn.selected { background: linear-gradient(135deg, #c9a45c, #b8943a); color: #1e1b16; border-color: #c9a45c; font-weight: 600; box-shadow: 0 0 10px rgba(201, 164, 92, 0.5); }
+        .opt-btn:hover { border-color: #c9a45c; color: #e5c67a; background: rgba(201, 164, 92, 0.12); transform: translateY(-1px); }
+        .color-btn { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px 6px 8px; background: rgba(30, 30, 28, 0.7); border: 1px solid rgba(90, 80, 64, 0.7); border-radius: 32px; cursor: pointer; font-size: 11.5px; color: #e6ddc5; transition: 0.2s; }
+        .color-btn.selected { background: linear-gradient(135deg, #c9a45c, #b8943a); color: #1e1b16; border-color: #c9a45c; }
+        .color-swatch { width: 18px; height: 18px; border-radius: 50%; display: inline-block; border: 1px solid rgba(255,255,255,0.2); }
+        .collapse-header { cursor: pointer; display: flex; justify-content: space-between; padding: 7px 0; user-select: none; }
+        .collapse-header .arrow { transition: transform 0.3s; color: #c9a45c; }
+        .collapse-header.open .arrow { transform: rotate(90deg); }
+        .collapse-body { overflow: hidden; max-height: 0; transition: max-height 0.4s; }
+        .collapse-body.expanded { max-height: 800px; }
+        .input-field input, .input-field textarea { width: 100%; padding: 11px 13px; background: rgba(30, 30, 28, 0.8); border: 1px solid rgba(74, 64, 48, 0.7); border-radius: 22px; color: #e6ddc5; }
+        .generate-btn { background: linear-gradient(135deg, #c94f33 0%, #a83524 100%); border: none; width: 100%; padding: 16px; font-size: 21px; font-weight: 600; color: #fff6e5; border-radius: 38px; cursor: pointer; margin-top: 16px; border-bottom: 3px solid var(--gold); transition: 0.2s; }
+        .generate-btn:hover { transform: scale(0.98); background: linear-gradient(135deg, #dc5a3d 0%, #b8402a 100%); }
+        .prompt-item { background: rgba(43, 42, 36, 0.8); border: 1px solid rgba(68, 62, 47, 0.6); border-radius: 26px; padding: 20px; margin-bottom: 12px; }
+        .prompt-number { font-size: 12.5px; font-weight: 600; color: #e5c67a; margin-bottom: 9px; background: rgba(59, 53, 36, 0.8); display: inline-block; padding: 5px 16px; border-radius: 20px; }
+        .prompt-text { font-size: 13.5px; line-height: 1.75; color: #ffffff !important; margin-bottom: 12px; word-break: break-word; }
+        .copy-btn { background: transparent; color: #c9a45c; border: 1px solid rgba(201, 164, 92, 0.7); border-radius: 22px; padding: 6px 18px; cursor: pointer; margin-top: 8px; transition: 0.2s; }
+        .copy-btn:hover { background: #c9a45c; color: #1e1b16; }
+        .element-picker { background: rgba(0,0,0,0.25); border-radius: 24px; padding: 16px; margin: 8px 0; max-height: 380px; overflow-y: auto; }
+        .ele-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, auto)); gap: 8px; margin-top: 6px; }
+        .elem-badge { display: inline-flex; align-items: center; justify-content: center; background: #2c2a24; border: 1px solid #5a5240; border-radius: 32px; padding: 6px 12px; font-size: 11px; cursor: pointer; color: #cfc3a6; transition: 0.15s; }
+        .elem-badge.selected { background: linear-gradient(135deg, #c9a45c, #b8943a); color: #1e1b16; border-color: #c9a45c; font-weight: 500; }
+        .elem-badge:hover { transform: translateY(-1px); border-color: #e6c67a; background: rgba(201,164,92,0.2); }
+        .selected-elem-area { background: #1e1e1c; border-radius: 28px; padding: 10px 16px; margin-top: 12px; font-size: 12px; color: #ecd69b; border: 1px solid rgba(201,164,92,0.3); }
+        .clear-elem { background: #3d3524; border: none; border-radius: 32px; padding: 5px 16px; font-size: 11px; margin-top: 8px; cursor: pointer; color: #f0e6cd; }
+        .extra-output { background: rgba(38, 36, 30, 0.7); border-radius: 18px; padding: 16px; margin-top: 16px; display: none; }
+        .footer-note { margin-top: 18px; font-size: 12px; color: #b8aa8a; text-align: right; border-top: 1px solid #3d3a32; padding-top: 12px; }
+        @media (max-width: 960px) { .input-section, .output-section { min-width: 100%; } .input-section { border-right: none; } }
     </style>
 </head>
 <body>
-    <div class="generator-card">
-        <div class="header">
-            <div class="header-top">
-                <h1 id="mainTitle">🏮 商业美陈AI提示词 · 设计总监版</h1>
-                <span class="subtitle" id="subtitleText">正立面视角 · 20组方案 · 全风格覆盖</span>
+<div class="generator-card">
+    <div class="header">
+        <div class="header-top"><h1 id="mainTitle">🏮 商业美陈AI提示词 · 设计总监版</h1><span class="subtitle" id="subtitleText">自由多选 · 无默认强加</span></div>
+        <div class="project-desc-frame"><div class="frame-item"><span class="frame-label">项目描述</span><span class="frame-value" id="frameProjectDesc">美陈古月智能体</span></div></div>
+    </div>
+    <div class="main">
+        <div class="input-section">
+            <div><div class="section-title"><span>📝</span> 项目描述</div><textarea id="projectDescInput">美陈古月智能体</textarea></div>
+            <div><div class="section-title"><span>🎨</span> 风格系列 (多选·可不选)</div><div class="btn-row" id="seriesBtns"></div></div>
+            <div><div class="section-title"><span>📌</span> 具体风格 (多选·可不选)</div><div class="btn-row" id="subStyleBtns"></div></div>
+            <div><div class="section-title"><span>🏷️</span> 风格标签 (多选·可不选)</div><div class="btn-row" id="styleTagBtns"></div></div>
+            <div><div class="section-title"><span>🏢</span> 场地背景 (多选·可不选)</div><div class="btn-row" id="venueBtns"></div></div>
+            <!-- 节日主题：多选按钮，不选则显示通用库 -->
+            <div><div class="section-title"><span>🎎</span> 节日主题 (多选·可不选)</div>
+                <div class="btn-row" id="festivalBtns"></div>
             </div>
-            <div class="project-desc-frame" id="projectDescFrame">
-                <div class="frame-item">
-                    <span class="frame-label">项目描述</span>
-                    <span class="frame-value" id="frameProjectDesc">美陈古月智能体</span>
-                </div>
+            <div><div class="section-title"><span>✨</span> 核心元素 <span style="font-size:10px;color:#9b927a;">(多选·可不选)</span></div>
+                <div id="coreElementPanel" class="element-picker"></div>
+                <div class="selected-elem-area" id="selectedElemDisplay">当前选中元素: 无</div>
+                <button id="clearElemBtn" class="clear-elem">🗑️ 清空所有元素</button>
             </div>
+            <div><div class="section-title"><span>🌈</span> 色彩体系 (多选·色块·可不选)</div><div class="btn-row" id="colorBtns"></div></div>
+            <div><div class="collapse-header" id="materialHeader"><span class="section-title" style="border-bottom:none;">🔩 材质选择 (多选·可不选)</span><span class="arrow">▶</span></div>
+                <div class="collapse-body expanded" id="materialBody"><div class="btn-row" id="materialBtns"></div></div></div>
+            <div><div class="collapse-header" id="lightHeader"><span class="section-title" style="border-bottom:none;">💡 灯光系统 (多选·可不选)</span><span class="arrow">▶</span></div>
+                <div class="collapse-body" id="lightBody"><div class="btn-row" id="lightBtns"></div><div class="btn-group-label" style="margin-top:8px;">✨ 灯光动态模式 (多选·可不选)</div><div class="btn-row" id="lightEffectBtns"></div></div></div>
+            <div><div class="section-title"><span>🏗️</span> 结构形式 (多选·可不选)</div><div class="btn-row" id="structureBtns"></div></div>
+            <div><div class="section-title"><span>🎮</span> 互动形式偏好 (多选·可不选)</div><div class="btn-row" id="interactionPrefBtns"></div></div>
+            <div><div class="section-title"><span>📋</span> 内容选择 (多选·可不选)</div><div class="btn-row" id="contentTypeBtns"></div></div>
+            <div><div class="section-title"><span>📐</span> 尺寸设定 (数值可修改)</div><div class="input-row"><div class="input-field"><label>宽度(米)</label><input type="number" id="widthInput" value="10.0" step="0.1"></div><div class="input-field"><label>高度(米)</label><input type="number" id="heightInput" value="5.63" step="0.01"></div></div><div class="lock-option"><input type="checkbox" id="lockRatio" checked><label>锁定16:9</label></div></div>
+            <div><div class="collapse-header" id="advancedHeader"><span class="section-title" style="border-bottom:none;">🤖 AI高级模块 (多选·可不选)</span><span class="arrow">▶</span></div>
+                <div class="collapse-body" id="advancedBody"><div class="btn-group-label">📖 故事线主题</div><div class="btn-row" id="storyBtns"></div><div class="btn-group-label">🎮 互动玩法</div><div class="btn-row" id="interactBtns"></div><div class="btn-group-label">💰 成本维度</div><div class="btn-row" id="budgetBtns"></div><div class="btn-group-label">🔧 安装维度</div><div class="btn-row" id="installBtns"></div><div class="btn-group-label">🕐 时间维度</div><div class="btn-row" id="timeBtns"></div></div></div>
+            <button class="generate-btn" id="generateBtn">✨ 生成 20 组提示词 ✨</button>
         </div>
-        <div class="main">
-            <div class="input-section" id="inputPanel">
-                <div>
-                    <div class="section-title"><span>📝</span> 项目描述 <span style="font-size:10px;color:#9b927a;">(动态更新主标题图框)</span></div>
-                    <div class="input-row">
-                        <div class="input-field" style="flex:1 1 100%;">
-                            <label>🎯 项目描述</label>
-                            <textarea id="projectDescInput" placeholder="美陈古月智能体">美陈古月智能体</textarea>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="section-title"><span>🎨</span> 风格系列 (多选)</div>
-                    <div class="btn-row" id="seriesBtns"></div>
-                </div>
-                <div id="subStyleBlock">
-                    <div class="section-title"><span>📌</span> 具体风格 (多选)</div>
-                    <div class="btn-row" id="subStyleBtns"></div>
-                </div>
-                <div>
-                    <div class="section-title"><span>🏷️</span> 风格标签 (多选)</div>
-                    <div class="btn-row" id="styleTagBtns"></div>
-                </div>
-                <div>
-                    <div class="section-title"><span>🏢</span> 场地背景 (多选)</div>
-                    <div class="btn-row" id="venueBtns"></div>
-                </div>
-                <div id="elementsBlock">
-                    <div class="section-title"><span>🎎</span> 核心元素 <span style="font-size:10px;color:#9b927a;">(点击多选)</span></div>
-                    <div id="coreElementPanel" class="element-picker"></div>
-                    <div class="selected-elem-area" id="selectedElemDisplay">当前选中元素: 祥云 · 如意纹 · 牡丹</div>
-                    <button id="clearElemBtn" class="clear-elem">🗑️ 清空所有元素</button>
-                </div>
-                <!-- 色彩体系：色块+文字 多选按钮 -->
-                <div>
-                    <div class="section-title"><span>🌈</span> 色彩体系 (多选 · 色块+文字)</div>
-                    <div class="btn-row" id="colorBtns"></div>
-                </div>
-                <div>
-                    <div class="collapse-header" id="materialHeader">
-                        <span class="section-title" style="border-bottom:none;padding-bottom:0;"><span>🔩</span> 材质选择 (多选)</span>
-                        <span class="arrow">▶</span>
-                    </div>
-                    <div class="collapse-body expanded" id="materialBody">
-                        <div class="btn-row" id="materialBtns" style="margin-top:7px;"></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="collapse-header" id="lightHeader">
-                        <span class="section-title" style="border-bottom:none;padding-bottom:0;"><span>💡</span> 灯光系统 (多选)</span>
-                        <span class="arrow">▶</span>
-                    </div>
-                    <div class="collapse-body" id="lightBody">
-                        <div class="btn-row" id="lightBtns" style="margin-top:7px;"></div>
-                        <div class="btn-group-label" style="margin-top:8px;">✨ 灯光动态模式 (多选)</div>
-                        <div class="btn-row" id="lightEffectBtns"></div>
-                    </div>
-                </div>
-                <div>
-                    <div class="section-title"><span>🏗️</span> 结构形式 (多选)</div>
-                    <div class="btn-row" id="structureBtns"></div>
-                </div>
-                <div>
-                    <div class="section-title"><span>🎮</span> 互动形式偏好 (多选)</div>
-                    <div class="btn-row" id="interactionPrefBtns"></div>
-                </div>
-                <div>
-                    <div class="section-title"><span>📋</span> 内容选择 (多选)</div>
-                    <div class="btn-row" id="contentTypeBtns"></div>
-                </div>
-                <div>
-                    <div class="section-title"><span>📐</span> 尺寸设定</div>
-                    <div class="input-row">
-                        <div class="input-field"><label>宽度 (米)</label><input type="number" id="widthInput" value="10.0" step="0.1" min="1.0" max="50.0"></div>
-                        <div class="input-field"><label>高度 (米)</label><input type="number" id="heightInput" value="5.63" step="0.01" min="0.5" max="30.0"></div>
-                    </div>
-                    <div class="lock-option">
-                        <input type="checkbox" id="lockRatio" checked>
-                        <label for="lockRatio">锁定 16:9 宽屏比例</label>
-                    </div>
-                </div>
-                <div>
-                    <div class="collapse-header" id="advancedHeader">
-                        <span class="section-title" style="border-bottom:none;padding-bottom:0;"><span>🤖</span> AI高级模块 (多选)</span>
-                        <span class="arrow">▶</span>
-                    </div>
-                    <div class="collapse-body" id="advancedBody">
-                        <div style="margin-top:7px;display:flex;flex-direction:column;gap:7px;">
-                            <div class="btn-group-label">📖 故事线主题</div>
-                            <div class="btn-row" id="storyBtns"></div>
-                            <div class="btn-group-label" style="margin-top:3px;">🎮 互动玩法</div>
-                            <div class="btn-row" id="interactBtns"></div>
-                            <div class="btn-group-label" style="margin-top:3px;">💰 成本维度</div>
-                            <div class="btn-row" id="budgetBtns"></div>
-                            <div class="btn-group-label" style="margin-top:3px;">🔧 安装维度</div>
-                            <div class="btn-row" id="installBtns"></div>
-                            <div class="btn-group-label" style="margin-top:3px;">🕐 时间维度</div>
-                            <div class="btn-row" id="timeBtns"></div>
-                        </div>
-                    </div>
-                </div>
-                <button class="generate-btn" id="generateBtn">✨ 生成 20 组提示词 ✨</button>
-            </div>
-            <div class="output-section" id="outputSection">
-                <div class="output-header">
-                    <h2>🎐 正立面美陈 · AI绘画提示词</h2>
-                    <span class="badge" id="countDisplay">0 / 20</span>
-                </div>
-                <div class="prompts-grid" id="promptsList">
-                    <div class="prompt-item" style="background:#26241e;text-align:center;padding:40px;align-items:center;">
-                        <div class="prompt-number">🏮 等待生成</div>
-                        <div class="prompt-text" style="color:#aa9f84;text-align:center;">选择风格系列与参数后，点击生成按钮</div>
-                    </div>
-                </div>
-                <div class="footer-note">
-                    ⚡ 每组独立设计 · 主色≤3 · 材质反差 · 留白≥30% · 含打卡锚点 · 含施工逻辑
-                </div>
-                <div class="extra-output" id="extraOutput" style="display:none;">
-                    <h4>📋 批量施工摘要</h4>
-                    <p id="extraContent"></p>
-                </div>
-            </div>
+        <div class="output-section">
+            <div class="output-header"><h2>🎐 AI绘画提示词</h2><span class="badge" id="countDisplay">0/20</span></div>
+            <div class="prompts-grid" id="promptsList"></div>
+            <div class="footer-note">⚡ 每组独立设计 · 仅输出已选择的板块 · 完全尊重用户选择</div>
+            <div class="extra-output" id="extraOutput"><h4>📋 批量施工摘要</h4><p id="extraContent"></p></div>
         </div>
     </div>
-    <script>
-        (function() {
-            // ========== 数据定义 ==========
-            const fullElementsLibrary = {
-                "吉祥类": ["祥云","如意纹","回纹","瑞兽纹","八宝纹","金元宝","铜钱","福袋","福字","财字","招财猫","聚宝盆","玉佩","印章","宫灯","华盖","龙纹","凤纹","麒麟","貔貅","仙鹤","锦鲤","金鱼"],
-                "花卉类": ["牡丹","梅花","兰花","竹子","菊花","荷花","桃花","樱花","山茶花","桂花","银杏叶","枫叶"],
-                "民俗类": ["中国结","灯笼","折扇","油纸伞","剪纸","窗花","舞狮","舞龙","戏曲脸谱","京剧元素","古建筑飞檐","榫卯结构","古风门楼","对联","爆竹","烟花装置"],
-                "新春商业": ["金币雨","金条","聚财树","发光元宝","财神IP","财神猫","红包墙","招财灯阵","金色瀑布","流金粒子","发光拱门","巨型礼盒","巨型气球","镜面球","旋转装置","LED互动屏","AI灯光装置","无限镜空间","发光隧道","动态机械花","国潮IP","赛博中国风","未来灯塔","机械龙","数字祥云","光影水纹","全息投影","裸眼3D","巨型艺术字","悬浮装置"],
-                "浪漫婚礼": ["爱心","羽毛","水晶链","花艺瀑布","欧式雕花","皇冠","白鸽","星河灯","月亮装置","玫瑰墙","香槟塔","蝴蝶","纱幔","水晶球","漂浮花园"],
-                "儿童IP": ["熊猫","兔子","小熊","狐狸","恐龙","宇航员","太空飞船","云朵","彩虹","棉花糖","糖果","积木","泡泡球","卡通树","梦幻蘑菇","潮玩雕塑","盲盒IP","Q版人物","二次元元素","机械玩偶","发光公仔"],
-                "自然生态": ["仿真树","苔藓","枯木","绿植墙","花海","水景","瀑布","岩石","云雾","雨林","鹿雕塑","森林精灵","海浪","贝壳","水母","鲸鱼","珊瑚","蓝洞","海豚","海星","气泡灯"],
-                "科技未来": ["科技线条","数据流","光纤灯","几何矩阵","发光圆环","悬浮立方体","AI芯片纹理","星际轨道","能量核心","机械结构","镭射镜面","全息屏","数字粒子","激光矩阵"],
-                "艺术装置": ["镜面不锈钢","气膜装置","悬浮雕塑","几何艺术体","动态风车","风动装置","镜面球","光影雕塑","巨型字母","艺术拱门","异形结构","参数化曲面"]
-            };
-            
-            // 色彩体系：全部颜色名称列表（含色块）
-            const colorFullList = [
-                "中国红","帝王黄","宝石蓝","孔雀绿","翡翠绿","松石绿","深海蓝","星空黑","珍珠白","奶油白","雾霾灰","银灰色","香槟金","古铜金","玫瑰金","哑光黑",
-                "红金配色","黑金配色","朱砂红+鎏金","中国红+祥云金","故宫红+琉璃黄","赤金色","龙鳞金","宫廷蓝金","墨绿色+古金","丹霞橙+金",
-                "黑金","白金","香槟金","深咖金","酒红金","宝石蓝金","翡翠绿金","银黑配色","深紫金","暗夜蓝银",
-                "电光蓝","赛博紫","荧光青","激光粉","银河银","数据蓝","冰川白","极光渐变","蓝紫渐变","镭射彩虹色",
-                "马卡龙粉","蜜桃橙","奶油黄","湖水蓝","薄荷绿","樱花粉","香芋紫","云朵白","糖果彩虹","冰淇淋渐变",
-                "苔藓绿","森林绿","原木棕","岩石灰","湖泊蓝","雾森白","枫叶红","泥土棕","山野绿","草木青",
-                "莫兰迪粉","莫兰迪蓝","莫兰迪绿","雾灰紫","奶咖灰","烟灰蓝","浅豆沙","米杏色","低饱和橄榄绿",
-                "蓝紫渐变","粉紫渐变","红橙渐变","金橙渐变","青蓝渐变","极光渐变","彩虹渐变","日落渐变"
-            ];
-            
-            // 颜色到色块背景的映射函数
-            function getColorSwatchBg(colorName) {
-                const colorMap = {
-                    "中国红": "#C41E3A", "帝王黄": "#FFB300", "宝石蓝": "#0F52BA", "孔雀绿": "#228B22", "翡翠绿": "#50C878",
-                    "松石绿": "#40E0D0", "深海蓝": "#003366", "星空黑": "#1A1A1A", "珍珠白": "#F5F5F5", "奶油白": "#FFFDD0",
-                    "雾霾灰": "#8B8682", "银灰色": "#C0C0C0", "香槟金": "#F7E7CE", "古铜金": "#B87333", "玫瑰金": "#B76E79",
-                    "哑光黑": "#2C2C2C", "红金配色": "linear-gradient(135deg, #C41E3A, #FFD700)", "黑金配色": "linear-gradient(135deg, #1A1A1A, #FFD700)",
-                    "朱砂红+鎏金": "linear-gradient(135deg, #E34234, #F1C40F)", "中国红+祥云金": "linear-gradient(135deg, #E32636, #FFD700)",
-                    "故宫红+琉璃黄": "linear-gradient(135deg, #C0392B, #F1C40F)", "赤金色": "#D4AF37", "龙鳞金": "#E6C300",
-                    "宫廷蓝金": "linear-gradient(135deg, #1E3A8A, #D4AF37)", "墨绿色+古金": "linear-gradient(135deg, #1E4D2E, #C5A059)",
-                    "丹霞橙+金": "linear-gradient(135deg, #FF7F50, #FFD700)", "黑金": "linear-gradient(135deg, #222, #FFD700)",
-                    "白金": "linear-gradient(135deg, #E0E0E0, #FFFFFF)", "深咖金": "linear-gradient(135deg, #6F4E37, #D4AF37)",
-                    "酒红金": "linear-gradient(135deg, #722F37, #FFD700)", "宝石蓝金": "linear-gradient(135deg, #0F52BA, #FFD700)",
-                    "翡翠绿金": "linear-gradient(135deg, #50C878, #FFD700)", "银黑配色": "linear-gradient(135deg, #2C2C2C, #C0C0C0)",
-                    "深紫金": "linear-gradient(135deg, #4B0082, #D4AF37)", "暗夜蓝银": "linear-gradient(135deg, #0A192F, #C0C0C0)",
-                    "电光蓝": "#00FFFF", "赛博紫": "#BF00FF", "荧光青": "#00FFCC", "激光粉": "#FF69B4", "银河银": "#E0E6ED",
-                    "数据蓝": "#2A52BE", "冰川白": "#E8F0F8", "极光渐变": "linear-gradient(135deg, #00FF88, #00BFFF)", "蓝紫渐变": "linear-gradient(135deg, #4169E1, #8A2BE2)",
-                    "镭射彩虹色": "linear-gradient(135deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3)",
-                    "马卡龙粉": "#FFB6C1", "蜜桃橙": "#FFCBA4", "奶油黄": "#FFFACD", "湖水蓝": "#7FFFD4", "薄荷绿": "#98FB98",
-                    "樱花粉": "#FFC0CB", "香芋紫": "#C3B1E1", "云朵白": "#F0FFFF", "糖果彩虹": "linear-gradient(135deg, #FFB7B2, #FFDAC1, #E2F0CB, #B5EAD7, #C7CEEA)",
-                    "冰淇淋渐变": "linear-gradient(135deg, #FFB3BA, #C5E99B, #B5EAD7, #A0E7E5)",
-                    "苔藓绿": "#4A5D23", "森林绿": "#228B22", "原木棕": "#8B5A2B", "岩石灰": "#6A5A4F", "湖泊蓝": "#3F6A8A",
-                    "雾森白": "#E8EAE6", "枫叶红": "#C23B22", "泥土棕": "#7B4A2E", "山野绿": "#5E8C5A", "草木青": "#8DB600",
-                    "莫兰迪粉": "#DDBEA9", "莫兰迪蓝": "#9FB6CD", "莫兰迪绿": "#B2C9AB", "雾灰紫": "#C6C2D4", "奶咖灰": "#C2B280",
-                    "烟灰蓝": "#6C7A89", "浅豆沙": "#D9B8A8", "米杏色": "#EED9B0", "低饱和橄榄绿": "#A5B68A",
-                    "粉紫渐变": "linear-gradient(135deg, #FFB6C1, #DDA0DD)", "红橙渐变": "linear-gradient(135deg, #FF4500, #FF8C00)",
-                    "金橙渐变": "linear-gradient(135deg, #FFD700, #FF8C00)", "青蓝渐变": "linear-gradient(135deg, #00CED1, #1E90FF)",
-                    "彩虹渐变": "linear-gradient(135deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #9400D3)",
-                    "日落渐变": "linear-gradient(135deg, #FF7E5F, #FEB47B)"
-                };
-                if (colorMap[colorName]) return colorMap[colorName];
-                // 默认根据名称中的颜色词简单匹配
-                if (colorName.includes("红")) return "#DC143C";
-                if (colorName.includes("金")) return "#FFD700";
-                if (colorName.includes("蓝")) return "#4169E1";
-                if (colorName.includes("绿")) return "#2E8B57";
-                if (colorName.includes("白")) return "#F0F0F0";
-                if (colorName.includes("黑")) return "#2F2F2F";
-                if (colorName.includes("灰")) return "#A9A9A9";
-                if (colorName.includes("紫")) return "#9370DB";
-                if (colorName.includes("橙")) return "#FF8C00";
-                if (colorName.includes("黄")) return "#FFD700";
-                if (colorName.includes("粉")) return "#FFB6C1";
-                if (colorName.includes("渐变")) return "linear-gradient(135deg, #FFD700, #FF69B4)";
-                return "#CCCCCC";
-            }
-            
-            const materialFullList = ["亚克力","镜面不锈钢","拉丝不锈钢","铝板","KT板","PVC","木饰面","发光灯膜","透光布","软膜天花","玻璃钢","树脂","水晶材质","镭射膜","LED屏","雾化玻璃","气模","仿真花艺","竹艺","布艺","纸艺","水波纹不锈钢","发光树脂","数字屏幕","AI动态屏"];
-            const lightFullList = ["洗墙灯","线性灯","点光源","霓虹灯","发光字","星空灯","水波纹灯","激光灯","动态追光","呼吸灯","光纤灯","氛围投影","互动感应灯","地面投影","轮廓暖黄灯带","内透光","霓虹灯带","全息投影灯"];
-            const lightEffectModes = ["呼吸渐变","流光渐变","跑马灯渐变","星河流动","水波动态","粒子动态","静态柔光"];
-            const structureFullList = ["拱门","门楼","中庭吊饰","吊幔","天幕","柱体包装","环形装置","放射结构","对称结构","岛台结构","沉浸式空间","长廊空间","打卡盒子","艺术塔楼","门头式","悬挂式","巨型装置","模块化装置"];
-            const styleTagList = ["国潮风","新中式","现代极简","赛博朋克","未来科技","梦幻童话","法式轻奢","INS风","艺术装置风","东方禅意","新年庙会风","宫廷风","蒸汽朋克","参数化艺术","潮玩艺术"];
-            const venueFullList = ['购物中心外广场', '商场中庭挑空区', '商业街主入口', '酒店大堂背景墙', '写字楼前台大厅', '社区中心广场', '文化街区入口',
-                '景区游客中心', '会展中心序厅', '机场出发大厅', '高铁站候车厅', '博物馆入口大厅', '干净米白纯色背景', '深灰纯色背景', '深夜蓝纯色背景', '品牌旗舰店入口'];
-            const seriesOptions = ['国风系', '商业潮流系', '卡通IP系', '节庆主题系', '艺术装置系', '自然生态系', '民族文化系', '引流型'];
-            const subStyleMap = {
-                '国风系': ['传统吉祥', '国潮', '新中式', '宋式美学', '唐风', '东方禅意', '古典宫廷', '非遗风', '山海经风', '汉服风', '戏曲风', '水墨风', '国风赛博'],
-                '商业潮流系': ['潮玩', '年轻化潮流', '朋克', '涂鸦', '街头艺术', 'Y2K', '解构主义', '未来科技', '赛博朋克', '蒸汽朋克', 'AI数字艺术', 'NFT视觉风'],
-                '卡通IP系': ['卡通', 'Q版', '二次元', '泡泡玛特风', '治愈系', '萌宠系', '童话系', '儿童互动', '动漫IP', '盲盒风', '乐园风'],
-                '节庆主题系': ['春节', '元宵', '中秋', '端午', '七夕', '圣诞', '万圣节', '情人节', '跨年', '开学季', '毕业季', '店庆', '周年庆'],
-                '艺术装置系': ['极简艺术', '镜面艺术', '几何艺术', '光影艺术', '装置艺术', '沉浸式', '互动艺术', '数字媒体艺术', 'AI光影', '参数化设计'],
-                '自然生态系': ['森林系', '花艺系', '热带植物', '海洋系', '星空宇宙', '沙漠风', '冰雪风', '自然疗愈', '可持续环保', '原木生态'],
-                '民族文化系': ['苗族', '藏族', '蒙古族', '傣族', '敦煌', '西域', '少数民族图腾', '民俗文化', '地域文化'],
-                '引流型': ['打卡传播型', '互动型', '微互动型', '商业转化型', '快闪活动型', '发布会活动型', '品牌展示型', '夜景灯光型', '短视频传播型', '小红书出片型', '抖音直播型']
-            };
-            const interactionPrefList = ['打卡拍照优先', '沉浸体验优先', '游戏互动优先', 'AR/VR优先', '社交分享优先', '亲子互动优先', '品牌互动优先'];
-            const contentTypeList = ['品牌故事展示', '产品/新品发布', '节日祝福与促销', '文化科普教育', '艺术美学欣赏', '社区互动活动', '快闪主题活动'];
-            const storyList = ['东方神话', '时间隧道', '未来城市', '山海秘境', '梦幻仙境', '星际穿越', '古风雅集', '城市记忆'];
-            const interactList = ['扫码抽奖', 'AI换脸', '灯光感应', '情绪互动', '触摸感应', '声音互动', '体感游戏', 'AR合影'];
-            const budgetList = ['低预算(≤5万)', '中预算(5-20万)', '高预算(20万+)', '快闪低成本(≤3万)', '高端定制(50万+)'];
-            const installList = ['可拆卸', '重复利用', '快速搭建', '防雨', '防风', '防火', '模块化组装', '免工具安装'];
-            const timeList = ['白天效果', '夜景效果', '四季变化', '节庆切换', '日夜双模式'];
-            
-            // DOM 元素
-            const projectDescInput = document.getElementById('projectDescInput');
-            const frameProjectDesc = document.getElementById('frameProjectDesc');
-            const mainTitle = document.getElementById('mainTitle');
-            const subtitleText = document.getElementById('subtitleText');
-            const generateBtn = document.getElementById('generateBtn');
-            const promptsListDiv = document.getElementById('promptsList');
-            const countDisplay = document.getElementById('countDisplay');
-            const extraOutput = document.getElementById('extraOutput');
-            const extraContent = document.getElementById('extraContent');
-            const widthInput = document.getElementById('widthInput');
-            const heightInput = document.getElementById('heightInput');
-            const lockRatioCheck = document.getElementById('lockRatio');
-            let currentPrompts = [];
-            
-            // 多选状态 Set
-            let selectedSeriesSet = new Set(['国风系']);
-            let selectedSubStyleSet = new Set(['传统吉祥']);
-            let selectedStyleTagSet = new Set(['国潮风']);
-            let selectedVenueSet = new Set(['购物中心外广场']);
-            let selectedElementsSet = new Set(['祥云', '如意纹', '牡丹']);
-            let selectedColorSet = new Set(['中国红+祥云金']);
-            let selectedMaterialSet = new Set(['亚克力', '镜面不锈钢']);
-            let selectedLightSet = new Set(['洗墙灯', '内透光']);
-            let selectedLightEffectSet = new Set(['呼吸渐变']);
-            let selectedStructureSet = new Set(['岛台式']);
-            let selectedInteractionPrefSet = new Set(['打卡拍照优先']);
-            let selectedContentTypeSet = new Set(['品牌故事展示']);
-            let selectedStorySet = new Set(['东方神话']);
-            let selectedInteractSet = new Set(['灯光感应']);
-            let selectedBudgetSet = new Set(['中预算(5-20万)']);
-            let selectedInstallSet = new Set(['可拆卸']);
-            let selectedTimeSet = new Set(['白天效果']);
-            
-            // 通用多选渲染（普通按钮）
-            function renderMultiSelect(containerId, options, selectedSet, onChange) {
-                const container = document.getElementById(containerId);
-                if(!container) return;
-                container.innerHTML = options.map(opt => `<button class="opt-btn" data-value="${opt.replace(/"/g, '&quot;')}">${opt}</button>`).join('');
-                container.querySelectorAll('.opt-btn').forEach(btn => {
-                    const val = btn.dataset.value;
-                    if(selectedSet.has(val)) btn.classList.add('selected');
-                    btn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        if(selectedSet.has(val)) selectedSet.delete(val);
-                        else selectedSet.add(val);
-                        if(onChange) onChange();
-                        refreshSelections(containerId, selectedSet);
-                    });
-                });
-            }
-            // 色彩多选渲染（带色块）
-            function renderColorMultiSelect() {
-                const container = document.getElementById('colorBtns');
-                if(!container) return;
-                container.innerHTML = colorFullList.map(color => {
-                    const bg = getColorSwatchBg(color);
-                    const isSelected = selectedColorSet.has(color);
-                    // 处理渐变色背景的 swatch 特殊样式
-                    const swatchStyle = bg.includes('linear-gradient') ? `background: ${bg};` : `background-color: ${bg};`;
-                    return `<button class="color-btn ${isSelected ? 'selected' : ''}" data-value="${color.replace(/"/g, '&quot;')}">
-                                <span class="color-swatch" style="${swatchStyle}"></span>
-                                <span>${color}</span>
-                            </button>`;
-                }).join('');
-                container.querySelectorAll('.color-btn').forEach(btn => {
-                    const val = btn.dataset.value;
-                    btn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        if(selectedColorSet.has(val)) selectedColorSet.delete(val);
-                        else selectedColorSet.add(val);
-                        renderColorMultiSelect(); // 重新渲染以更新选中状态
-                        refreshAllSelections();
-                    });
-                });
-            }
-            function refreshSelections(containerId, selectedSet) {
-                const container = document.getElementById(containerId);
-                if(!container) return;
-                container.querySelectorAll('.opt-btn').forEach(btn => {
-                    if(selectedSet.has(btn.dataset.value)) btn.classList.add('selected');
-                    else btn.classList.remove('selected');
-                });
-            }
-            function refreshAllSelections() {
-                refreshSelections('seriesBtns', selectedSeriesSet);
+</div>
+<script>
+(function(){
+    // ---------- 数据定义 ----------
+    const fullElementsLibrary = {
+        "吉祥类": ["祥云","如意纹","回纹","瑞兽纹","八宝纹","金元宝","铜钱","福袋","福字","财字","招财猫","聚宝盆","玉佩","印章","宫灯","华盖","龙纹","凤纹","麒麟","貔貅","仙鹤","锦鲤","金鱼"],
+        "花卉类": ["牡丹","梅花","兰花","竹子","菊花","荷花","桃花","樱花","山茶花","桂花","银杏叶","枫叶"],
+        "民俗类": ["中国结","灯笼","折扇","油纸伞","剪纸","窗花","舞狮","舞龙","戏曲脸谱","京剧元素","古建筑飞檐","榫卯结构","古风门楼","对联","爆竹","烟花装置"],
+        "新春商业": ["金币雨","金条","聚财树","发光元宝","财神IP","财神猫","红包墙","招财灯阵","金色瀑布","流金粒子","发光拱门","巨型礼盒","巨型气球","镜面球","旋转装置","LED互动屏","AI灯光装置","无限镜空间","发光隧道","动态机械花","国潮IP","赛博中国风","未来灯塔","机械龙","数字祥云","光影水纹","全息投影","裸眼3D","巨型艺术字","悬浮装置"],
+        "浪漫婚礼": ["爱心","羽毛","水晶链","花艺瀑布","欧式雕花","皇冠","白鸽","星河灯","月亮装置","玫瑰墙","香槟塔","蝴蝶","纱幔","水晶球","漂浮花园"],
+        "儿童IP": ["熊猫","兔子","小熊","狐狸","恐龙","宇航员","太空飞船","云朵","彩虹","棉花糖","糖果","积木","泡泡球","卡通树","梦幻蘑菇","潮玩雕塑","盲盒IP","Q版人物","二次元元素","机械玩偶","发光公仔"],
+        "自然生态": ["仿真树","苔藓","枯木","绿植墙","花海","水景","瀑布","岩石","云雾","雨林","鹿雕塑","森林精灵","海浪","贝壳","水母","鲸鱼","珊瑚","蓝洞","海豚","海星","气泡灯"],
+        "科技未来": ["科技线条","数据流","光纤灯","几何矩阵","发光圆环","悬浮立方体","AI芯片纹理","星际轨道","能量核心","机械结构","镭射镜面","全息屏","数字粒子","激光矩阵"],
+        "艺术装置": ["镜面不锈钢","气膜装置","悬浮雕塑","几何艺术体","动态风车","风动装置","镜面球","光影雕塑","巨型字母","艺术拱门","异形结构","参数化曲面"]
+    };
+    const festivalElementsMap = {
+        "春节": ["福字","中国结","灯笼","红包","金元宝","铜钱","祥云","牡丹","烟花","舞狮","舞龙","财神","鞭炮","梅花","窗花","宫灯","灯笼长廊","年兽","锦鲤","金龙","祈福树","春联","剪纸","如意","金扇","国潮纹样","红绸","金色波浪纹","鼓","戏曲元素","祥云拱门","灯海","新年IP","醒狮装置","金色麦穗","稻穗","发财树","龙凤","玉佩","琉璃球","流苏","金色屏风","古建筑屋檐","城门楼","金色卷轴","国风市集","烟火艺术装置"],
+        "元宵节": ["花灯","鱼灯","兔子灯","宫灯","荷花灯","灯谜","月亮","玉兔","烟火","灯海","灯笼矩阵","古风长街","光影长廊","星空灯","祈愿牌","河灯","水纹","传统窗棂","彩灯树","福袋","锦鲤灯","古风桥梁","灯塔","月宫","桂花树","团圆餐桌","暖黄色光源","国潮插画","发光兔子","古建筑","汉服人物","彩色灯串","琉璃灯","诗词灯牌"],
+        "清明节": ["柳树","青团","山水","水墨","风筝","纸鸢","竹林","青绿色植物","烟雨","石桥","流水","茶具","古亭","雨滴装置","青石板","云雾","油纸伞","禅意景观","白鹤","青苔","竹编","书法","水纹","古风花窗","自然植物墙","轻雾系统","春景装置","传统村落元素"],
+        "端午节": ["龙舟","粽子","艾草","香囊","竹叶","水浪","龙纹","鼓","五彩绳","屈原文化","青绿色灯光","水墨山水","船桨","浪花","传统纹样","国潮龙头","竹编装置","荷叶","莲花","江河场景","古风码头","渔船","酒坛","汉服人物","旌旗","河灯","粽叶包裹艺术","端午香草","传统市集","龙形艺术装置"],
+        "七夕节": ["银河","鹊桥","玫瑰","爱心","月亮","星空","花海","纱幔","水晶","蝴蝶","情侣雕塑","心形气球","镜面装置","流星灯","紫粉灯光","云朵","发光秋千","告白墙","花艺拱门","法式花园","浪漫阶梯","星河隧道","钻石元素","香槟金装置","爱心霓虹灯","白色羽毛","玻璃房","梦幻灯串","爱情锁桥","月光艺术","情侣打卡点"],
+        "中秋节": ["月亮","玉兔","桂花","宫灯","云纹","月饼","嫦娥","星空","灯笼","古建筑","祥云","桂花树","月光装置","团圆餐桌","国潮纹样","诗词书法","流云灯光","竹林","湖面倒影","月宫","发光兔子","琉璃月球","东方美学屏风","灯海","金黄色灯带","古风桥梁","亭台楼阁","暖黄光效","月相艺术","国风插画"],
+        "重阳节": ["菊花","山景","秋叶","仙鹤","古亭","竹林","暖秋色","登高台","敬老文化","夕阳","书法","金黄色植物","秋收元素","传统纹样","古风屏风","银杏叶","红叶","山水画","古桥","茶文化","陶罐","禅意花艺","古村元素","木质结构","秋季花海","暖光灯笼"],
+        "冬至": ["雪景","饺子","汤圆","暖光","雪花","围炉","热饮","圣诞松枝","冬季木屋","暖色灯带","毛线元素","围巾","壁炉","白色森林","冰雪纹理","暖冬插画","玻璃球灯饰","白色鹿","冰晶","冬夜星空","暖黄氛围灯","发光雪花","热气效果","木质长桌","冬日集市"],
+        "国庆节": ["五星红旗","天安门","城市剪影","红绸","和平鸽","烟花","金色五角星","红金灯光","党建元素","山河图","城市天际线","祥云","国潮山水","城市模型","金色麦穗","爱国标语","红色灯柱","巨型数字","历史时间轴","金色雕塑","中国地图","城市灯海","舞台灯光","鼓","龙纹","金属装置","红色光影"],
+        "圣诞节": ["圣诞树","雪花","礼盒","麋鹿","圣诞老人","雪景","姜饼屋","拐杖糖","圣诞袜","铃铛","松枝","彩灯","壁炉","木屋","白雪森林","发光星星","极光灯","圣诞集市","红绿配色","金色球饰","雪橇","冰雪城堡","冬季街景","欧式橱窗","圣诞花环","玻璃彩球","礼物山","梦幻灯海","白色羽毛树"],
+        "万圣节": ["南瓜灯","骷髅","蝙蝠","黑猫","蜘蛛网","古堡","幽灵","魔法书","墓碑","紫黑灯光","巫师帽","魔药瓶","荧光灯","暗黑森林","黑色蜡烛","哥特建筑","血月","怪兽IP","机械怪物","蒸汽朋克","迷雾系统","恐怖长廊","黑橙灯光","魔法阵","恶魔翅膀","废墟","锁链","发光眼睛"],
+        "情人节": ["玫瑰","爱心","气球","花艺","镜面装置","钻石","水晶灯","香槟金","蝴蝶结","礼盒","羽毛","粉色灯光","法式雕塑","LOVE字母","发光花墙","情侣秋千","白色钢琴","浪漫拱门","心形霓虹灯","告白装置","云朵灯","丝带","星空","鲜花瀑布","香氛系统","梦幻泡泡"],
+        "妇女节/女神节": ["鲜花","香水","珠宝","口红","女性剪影","蝴蝶","轻奢装置","法式花园","粉金色","柔光灯","时尚秀场","艺术雕塑","玫瑰花墙","流线型结构","镜面不锈钢","羽毛","香槟金","品牌打卡区","时尚灯箱","高级布艺","柔美弧线","花艺吊顶"],
+        "儿童节": ["彩虹","糖果","卡通IP","气球","积木","旋转木马","动物","泡泡","游乐园","云朵","马卡龙色","笑脸","玩具熊","热气球","滑梯","漫画元素","发光字母","彩色地贴","互动屏幕","儿童列车","泡泡机","发光城堡","童话森林","卡通树","乐高风格","涂鸦墙"],
+        "毕业季": ["学士帽","胶卷","相册","青春标语","留言墙","黑板","书本","校门","纸飞机","时间轴","青春灯牌","蓝白配色","操场","校园长椅","星光灯串","回忆照片墙","拍照框","气球","纪念徽章","青春列车","梦想装置","发光数字","毕业证书模型"],
+        "618": ["数字装置","科技灯带","发光字","机械结构","未来感屏幕","电商ICON","赛博朋克","蓝红配色","数据流","光效矩阵","霓虹灯","悬浮装置","折扣牌","未来城市","流光通道","机械臂","数字粒子","电子屏幕","科技网格","AI视觉","动态光影"],
+        "双11": ["数字灯牌","未来科技","霓虹灯","赛博朋克","数据流","机械装置","电子屏幕","光影隧道","巨大数字","未来城市","发光矩阵","折扣标签","金属结构","蓝紫灯光","AI科技感","激光灯","动态广告屏","科技艺术雕塑","流动粒子","数字宇宙"],
+        "双12": ["红金配色","年终促销","礼盒","金色灯带","雪景","数字装置","促销灯牌","年货元素","新年氛围","红包墙","暖冬灯饰","商业橱窗","品牌LOGO","购物袋","金属发光字","商业美陈堆头","折扣艺术装置"],
+        "店庆": ["周年数字","品牌LOGO","时间轴","奖杯","荣誉墙","品牌历史","金属雕塑","品牌色灯光","签到墙","巨型礼盒","舞台","灯带","品牌IP","气球矩阵","企业文化墙","LED大屏","发光装置","庆典花艺","红毯","香槟塔","企业历程展示"],
+        "开业庆典": ["拱门","花篮","剪彩","红毯","气球","金色灯带","舞台","品牌LOGO","礼炮","烟雾机","签到墙","灯笼","红金装饰","LED屏","巨型礼盒","舞狮","鼓","彩带","发光字","商业橱窗","庆典背景板","鲜花瀑布","暖场灯光"],
+        "音乐节": ["舞台灯光","激光灯","霓虹灯","音响","金属架构","赛博朋克","街头艺术","荧光色","巨型屏幕","烟雾","DJ台","电子波纹","潮流涂鸦","未来科技","发光雕塑","灯光矩阵","音乐符号","潮玩IP","工业风","动态投影"],
+        "电竞节": ["科技蓝光","机械风","未来城市","电竞角色","能量核心","悬浮装置","数字矩阵","赛博朋克","游戏地图","发光键盘","电子纹理","金属结构","电竞舞台","动态屏幕","AI光效","未来机甲","虚拟角色","电竞LOGO","能量通道","光影隧道"],
+        "文旅灯会": ["大型灯组","国潮IP","花灯","巨型月亮","神话人物","古建筑","灯海","水景","互动投影","无人机灯光","数字光影","沉浸式场景","古风长街","巨型生肖","神兽","流光瀑布","光影森林","全息投影","发光雕塑","巨型花艺","机械灯光秀"]
+    };
+    // 所有节日列表（不含“通用”）
+    const festivalList = ["春节","元宵节","清明节","端午节","七夕节","中秋节","重阳节","冬至","国庆节","圣诞节","万圣节","情人节","妇女节/女神节","儿童节","毕业季","618","双11","双12","店庆","开业庆典","音乐节","电竞节","文旅灯会"];
+    
+    let selectedElementsSet = new Set();
+    let selectedFestivalsSet = new Set();  // 多选节日
+
+    const colorFullList = [
+        "中国红","帝王黄","宝石蓝","孔雀绿","翡翠绿","松石绿","深海蓝","星空黑","珍珠白","奶油白","雾霾灰","银灰色","香槟金","古铜金","玫瑰金","哑光黑",
+        "红金配色","黑金配色","朱砂红+鎏金","中国红+祥云金","故宫红+琉璃黄","赤金色","龙鳞金","宫廷蓝金","墨绿色+古金","丹霞橙+金",
+        "黑金","白金","香槟金","深咖金","酒红金","宝石蓝金","翡翠绿金","银黑配色","深紫金","暗夜蓝银",
+        "电光蓝","赛博紫","荧光青","激光粉","银河银","数据蓝","冰川白","极光渐变","蓝紫渐变","镭射彩虹色",
+        "马卡龙粉","蜜桃橙","奶油黄","湖水蓝","薄荷绿","樱花粉","香芋紫","云朵白","糖果彩虹","冰淇淋渐变",
+        "苔藓绿","森林绿","原木棕","岩石灰","湖泊蓝","雾森白","枫叶红","泥土棕","山野绿","草木青",
+        "莫兰迪粉","莫兰迪蓝","莫兰迪绿","雾灰紫","奶咖灰","烟灰蓝","浅豆沙","米杏色","低饱和橄榄绿",
+        "蓝紫渐变","粉紫渐变","红橙渐变","金橙渐变","青蓝渐变","极光渐变","彩虹渐变","日落渐变"
+    ];
+    const materialFullList = ["亚克力","镜面不锈钢","拉丝不锈钢","铝板","KT板","PVC","木饰面","发光灯膜","透光布","软膜天花","玻璃钢","树脂","水晶材质","镭射膜","LED屏","雾化玻璃","气模","仿真花艺","竹艺","布艺","纸艺","水波纹不锈钢","发光树脂","数字屏幕","AI动态屏"];
+    const lightFullList = ["洗墙灯","线性灯","点光源","霓虹灯","发光字","星空灯","水波纹灯","激光灯","动态追光","呼吸灯","光纤灯","氛围投影","互动感应灯","地面投影","轮廓暖黄灯带","内透光","霓虹灯带","全息投影灯"];
+    const lightEffectModes = ["呼吸渐变","流光渐变","跑马灯渐变","星河流动","水波动态","粒子动态","静态柔光"];
+    const structureFullList = ["拱门","门楼","中庭吊饰","吊幔","天幕","柱体包装","环形装置","放射结构","对称结构","岛台结构","沉浸式空间","长廊空间","打卡盒子","艺术塔楼","门头式","悬挂式","巨型装置","模块化装置"];
+    const styleTagList = ["国潮风","新中式","现代极简","赛博朋克","未来科技","梦幻童话","法式轻奢","INS风","艺术装置风","东方禅意","新年庙会风","宫廷风","蒸汽朋克","参数化艺术","潮玩艺术"];
+    const venueFullList = ['购物中心外广场','商场中庭挑空区','商业街主入口','酒店大堂背景墙','写字楼前台大厅','社区中心广场','文化街区入口','景区游客中心','会展中心序厅','机场出发大厅','高铁站候车厅','博物馆入口大厅','干净米白纯色背景','深灰纯色背景','深夜蓝纯色背景','品牌旗舰店入口'];
+    const seriesOptions = ['国风系','商业潮流系','卡通IP系','节庆主题系','艺术装置系','自然生态系','民族文化系','引流型'];
+    const subStyleMap = {
+        '国风系': ['传统吉祥','国潮','新中式','宋式美学','唐风','东方禅意','古典宫廷','非遗风','山海经风','汉服风','戏曲风','水墨风','国风赛博'],
+        '商业潮流系': ['潮玩','年轻化潮流','朋克','涂鸦','街头艺术','Y2K','解构主义','未来科技','赛博朋克','蒸汽朋克','AI数字艺术','NFT视觉风'],
+        '卡通IP系': ['卡通','Q版','二次元','泡泡玛特风','治愈系','萌宠系','童话系','儿童互动','动漫IP','盲盒风','乐园风'],
+        '节庆主题系': ['春节','元宵','中秋','端午','七夕','圣诞','万圣节','情人节','跨年','开学季','毕业季','店庆','周年庆'],
+        '艺术装置系': ['极简艺术','镜面艺术','几何艺术','光影艺术','装置艺术','沉浸式','互动艺术','数字媒体艺术','AI光影','参数化设计'],
+        '自然生态系': ['森林系','花艺系','热带植物','海洋系','星空宇宙','沙漠风','冰雪风','自然疗愈','可持续环保','原木生态'],
+        '民族文化系': ['苗族','藏族','蒙古族','傣族','敦煌','西域','少数民族图腾','民俗文化','地域文化'],
+        '引流型': ['打卡传播型','互动型','微互动型','商业转化型','快闪活动型','发布会活动型','品牌展示型','夜景灯光型','短视频传播型','小红书出片型','抖音直播型']
+    };
+    const interactionPrefList = ['打卡拍照优先','沉浸体验优先','游戏互动优先','AR/VR优先','社交分享优先','亲子互动优先','品牌互动优先'];
+    const contentTypeList = ['品牌故事展示','产品/新品发布','节日祝福与促销','文化科普教育','艺术美学欣赏','社区互动活动','快闪主题活动'];
+    const storyList = ['东方神话','时间隧道','未来城市','山海秘境','梦幻仙境','星际穿越','古风雅集','城市记忆'];
+    const interactList = ['扫码抽奖','AI换脸','灯光感应','情绪互动','触摸感应','声音互动','体感游戏','AR合影'];
+    const budgetList = ['低预算(≤5万)','中预算(5-20万)','高预算(20万+)','快闪低成本(≤3万)','高端定制(50万+)'];
+    const installList = ['可拆卸','重复利用','快速搭建','防雨','防风','防火','模块化组装','免工具安装'];
+    const timeList = ['白天效果','夜景效果','四季变化','节庆切换','日夜双模式'];
+
+    // DOM 元素
+    const projectDescInput = document.getElementById('projectDescInput');
+    const frameProjectDesc = document.getElementById('frameProjectDesc');
+    const mainTitle = document.getElementById('mainTitle');
+    const subtitleText = document.getElementById('subtitleText');
+    const generateBtn = document.getElementById('generateBtn');
+    const promptsListDiv = document.getElementById('promptsList');
+    const countDisplay = document.getElementById('countDisplay');
+    const extraOutput = document.getElementById('extraOutput');
+    const extraContent = document.getElementById('extraContent');
+    const widthInput = document.getElementById('widthInput');
+    const heightInput = document.getElementById('heightInput');
+    const lockRatioCheck = document.getElementById('lockRatio');
+    let currentPrompts = [];
+
+    // 多选状态Set (初始全部为空)
+    let selectedSeriesSet = new Set();
+    let selectedSubStyleSet = new Set();
+    let selectedStyleTagSet = new Set();
+    let selectedVenueSet = new Set();
+    let selectedColorSet = new Set();
+    let selectedMaterialSet = new Set();
+    let selectedLightSet = new Set();
+    let selectedLightEffectSet = new Set();
+    let selectedStructureSet = new Set();
+    let selectedInteractionPrefSet = new Set();
+    let selectedContentTypeSet = new Set();
+    let selectedStorySet = new Set();
+    let selectedInteractSet = new Set();
+    let selectedBudgetSet = new Set();
+    let selectedInstallSet = new Set();
+    let selectedTimeSet = new Set();
+
+    function getColorSwatchBg(colorName) {
+        const map = { "中国红":"#C41E3A","帝王黄":"#FFB300","宝石蓝":"#0F52BA","孔雀绿":"#228B22","翡翠绿":"#50C878","松石绿":"#40E0D0","深海蓝":"#003366","星空黑":"#1A1A1A","珍珠白":"#F5F5F5","奶油白":"#FFFDD0","雾霾灰":"#8B8682","银灰色":"#C0C0C0","香槟金":"#F7E7CE","古铜金":"#B87333","玫瑰金":"#B76E79","哑光黑":"#2C2C2C","红金配色":"linear-gradient(135deg,#C41E3A,#FFD700)","黑金配色":"linear-gradient(135deg,#1A1A1A,#FFD700)","电光蓝":"#00FFFF","赛博紫":"#BF00FF","荧光青":"#00FFCC","激光粉":"#FF69B4","银河银":"#E0E6ED","数据蓝":"#2A52BE","冰川白":"#E8F0F8","极光渐变":"linear-gradient(135deg,#00FF88,#00BFFF)","蓝紫渐变":"linear-gradient(135deg,#4169E1,#8A2BE2)" };
+        if(map[colorName]) return map[colorName];
+        if(colorName.includes("红")) return "#DC143C";
+        if(colorName.includes("金")) return "#FFD700";
+        if(colorName.includes("蓝")) return "#4169E1";
+        if(colorName.includes("绿")) return "#2E8B57";
+        return "#CCCCCC";
+    }
+
+    function renderMultiSelect(containerId, options, selectedSet, onChange) {
+        const container = document.getElementById(containerId);
+        if(!container) return;
+        container.innerHTML = options.map(opt => `<button class="opt-btn" data-value="${opt.replace(/"/g,'&quot;')}">${opt}</button>`).join('');
+        container.querySelectorAll('.opt-btn').forEach(btn => {
+            const val = btn.dataset.value;
+            if(selectedSet.has(val)) btn.classList.add('selected');
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if(selectedSet.has(val)) selectedSet.delete(val);
+                else selectedSet.add(val);
+                if(onChange) onChange();
+                refreshSelections(containerId, selectedSet);
+                // 如果节日选择变化，需刷新核心元素库
+                if(containerId === 'festivalBtns') {
+                    renderCoreElements();
+                }
+            });
+        });
+    }
+    function refreshSelections(containerId, selectedSet) {
+        const container = document.getElementById(containerId);
+        if(!container) return;
+        container.querySelectorAll('.opt-btn').forEach(btn => {
+            if(selectedSet.has(btn.dataset.value)) btn.classList.add('selected');
+            else btn.classList.remove('selected');
+        });
+    }
+    function renderColorMultiSelect() {
+        const container = document.getElementById('colorBtns');
+        if(!container) return;
+        container.innerHTML = colorFullList.map(color => {
+            const bg = getColorSwatchBg(color);
+            const isSelected = selectedColorSet.has(color);
+            return `<button class="color-btn ${isSelected ? 'selected' : ''}" data-value="${color.replace(/"/g,'&quot;')}"><span class="color-swatch" style="background:${bg};"></span><span>${color}</span></button>`;
+        }).join('');
+        container.querySelectorAll('.color-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const val = btn.dataset.value;
+                if(selectedColorSet.has(val)) selectedColorSet.delete(val);
+                else selectedColorSet.add(val);
+                renderColorMultiSelect();
+            });
+        });
+    }
+    function renderSubStyleMulti() {
+        let allSubs = [];
+        for(let s of selectedSeriesSet) if(subStyleMap[s]) allSubs.push(...subStyleMap[s]);
+        allSubs = [...new Set(allSubs)];
+        const container = document.getElementById('subStyleBtns');
+        if(!container) return;
+        container.innerHTML = allSubs.map(opt => `<button class="opt-btn" data-value="${opt.replace(/"/g,'&quot;')}">${opt}</button>`).join('');
+        container.querySelectorAll('.opt-btn').forEach(btn => {
+            const val = btn.dataset.value;
+            if(selectedSubStyleSet.has(val)) btn.classList.add('selected');
+            btn.addEventListener('click', () => {
+                if(selectedSubStyleSet.has(val)) selectedSubStyleSet.delete(val);
+                else selectedSubStyleSet.add(val);
                 refreshSelections('subStyleBtns', selectedSubStyleSet);
-                refreshSelections('styleTagBtns', selectedStyleTagSet);
-                refreshSelections('venueBtns', selectedVenueSet);
-                // 色彩已通过重新渲染处理，跳过
-                refreshSelections('materialBtns', selectedMaterialSet);
-                refreshSelections('lightBtns', selectedLightSet);
-                refreshSelections('lightEffectBtns', selectedLightEffectSet);
-                refreshSelections('structureBtns', selectedStructureSet);
-                refreshSelections('interactionPrefBtns', selectedInteractionPrefSet);
-                refreshSelections('contentTypeBtns', selectedContentTypeSet);
-                refreshSelections('storyBtns', selectedStorySet);
-                refreshSelections('interactBtns', selectedInteractSet);
-                refreshSelections('budgetBtns', selectedBudgetSet);
-                refreshSelections('installBtns', selectedInstallSet);
-                refreshSelections('timeBtns', selectedTimeSet);
-            }
-            
-            function renderSubStyleMulti() {
-                let allSubs = [];
-                for(let s of selectedSeriesSet) {
-                    if(subStyleMap[s]) allSubs.push(...subStyleMap[s]);
-                }
-                allSubs = [...new Set(allSubs)];
-                const container = document.getElementById('subStyleBtns');
-                if(!container) return;
-                container.innerHTML = allSubs.map(opt => `<button class="opt-btn" data-value="${opt.replace(/"/g, '&quot;')}">${opt}</button>`).join('');
-                container.querySelectorAll('.opt-btn').forEach(btn => {
-                    const val = btn.dataset.value;
-                    if(selectedSubStyleSet.has(val)) btn.classList.add('selected');
-                    btn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        if(selectedSubStyleSet.has(val)) selectedSubStyleSet.delete(val);
-                        else selectedSubStyleSet.add(val);
-                        refreshSelections('subStyleBtns', selectedSubStyleSet);
-                    });
+            });
+        });
+    }
+    // 核心元素渲染：根据选中的节日合并元素库
+    function renderCoreElements() {
+        let elementSet = new Set();
+        if(selectedFestivalsSet.size === 0) {
+            // 未选任何节日：展示通用分类库
+            let html = '';
+            for(let [cat, items] of Object.entries(fullElementsLibrary)) {
+                html += `<div style="margin-bottom:16px;"><div style="color:#e5c67a; font-size:12px; margin-bottom:8px;">📌 ${cat}</div><div class="ele-grid">`;
+                items.forEach(elem => {
+                    const isSelected = selectedElementsSet.has(elem);
+                    html += `<span class="elem-badge ${isSelected ? 'selected' : ''}" data-elem="${elem}">${elem}</span>`;
                 });
+                html += `</div></div>`;
             }
-            
-            function renderCoreElementPanel() {
-                let html = '';
-                for(let [cat, items] of Object.entries(fullElementsLibrary)) {
-                    html += `<div class="ele-cat"><div class="ele-cat-title">📌 ${cat}</div><div class="ele-grid">`;
-                    items.forEach(elem => {
-                        const isSelected = selectedElementsSet.has(elem) ? 'selected' : '';
-                        html += `<span class="elem-badge ${isSelected}" data-elem="${elem}">${elem}</span>`;
-                    });
-                    html += `</div></div>`;
-                }
-                document.getElementById('coreElementPanel').innerHTML = html;
-                document.querySelectorAll('.elem-badge').forEach(el => {
-                    el.addEventListener('click', () => {
-                        const elem = el.dataset.elem;
-                        if(selectedElementsSet.has(elem)) selectedElementsSet.delete(elem);
-                        else selectedElementsSet.add(elem);
-                        updateElemDisplay();
-                        refreshElemHighlights();
-                    });
-                });
+            document.getElementById('coreElementPanel').innerHTML = html;
+        } else {
+            // 合并所有选中节日的元素
+            for(let fest of selectedFestivalsSet) {
+                const arr = festivalElementsMap[fest] || [];
+                arr.forEach(e => elementSet.add(e));
+            }
+            const allElems = Array.from(elementSet);
+            let html = `<div class="ele-grid">`;
+            allElems.forEach(elem => {
+                const isSelected = selectedElementsSet.has(elem);
+                html += `<span class="elem-badge ${isSelected ? 'selected' : ''}" data-elem="${elem}">${elem}</span>`;
+            });
+            html += `</div>`;
+            document.getElementById('coreElementPanel').innerHTML = html;
+        }
+        // 绑定点击事件
+        document.querySelectorAll('.elem-badge').forEach(el => {
+            el.addEventListener('click', () => {
+                const elem = el.dataset.elem;
+                if(selectedElementsSet.has(elem)) selectedElementsSet.delete(elem);
+                else selectedElementsSet.add(elem);
                 updateElemDisplay();
-            }
-            function updateElemDisplay() {
-                const arr = Array.from(selectedElementsSet);
-                document.getElementById('selectedElemDisplay').innerHTML = `当前选中元素: ${arr.join(' · ') || '无'}`;
-            }
-            function refreshElemHighlights() {
-                document.querySelectorAll('.elem-badge').forEach(el => {
-                    const elem = el.dataset.elem;
-                    if(selectedElementsSet.has(elem)) el.classList.add('selected');
-                    else el.classList.remove('selected');
-                });
-            }
-            document.getElementById('clearElemBtn').addEventListener('click', () => { selectedElementsSet.clear(); updateElemDisplay(); refreshElemHighlights(); });
-            
-            function renderAll() {
-                renderMultiSelect('seriesBtns', seriesOptions, selectedSeriesSet, () => { renderSubStyleMulti(); });
-                renderSubStyleMulti();
-                renderMultiSelect('styleTagBtns', styleTagList, selectedStyleTagSet, null);
-                renderMultiSelect('venueBtns', venueFullList, selectedVenueSet, null);
-                renderColorMultiSelect();  // 带色块的色彩多选
-                renderMultiSelect('materialBtns', materialFullList, selectedMaterialSet, null);
-                renderMultiSelect('lightBtns', lightFullList, selectedLightSet, null);
-                renderMultiSelect('lightEffectBtns', lightEffectModes, selectedLightEffectSet, null);
-                renderMultiSelect('structureBtns', structureFullList, selectedStructureSet, null);
-                renderMultiSelect('interactionPrefBtns', interactionPrefList, selectedInteractionPrefSet, null);
-                renderMultiSelect('contentTypeBtns', contentTypeList, selectedContentTypeSet, null);
-                renderMultiSelect('storyBtns', storyList, selectedStorySet, null);
-                renderMultiSelect('interactBtns', interactList, selectedInteractSet, null);
-                renderMultiSelect('budgetBtns', budgetList, selectedBudgetSet, null);
-                renderMultiSelect('installBtns', installList, selectedInstallSet, null);
-                renderMultiSelect('timeBtns', timeList, selectedTimeSet, null);
-                renderCoreElementPanel();
-            }
-            
-            function updateProjectDescDisplay() {
-                const desc = projectDescInput.value.trim() || '美陈古月智能体';
-                frameProjectDesc.textContent = desc;
-                mainTitle.innerHTML = `🏮 ${desc} <span style="font-size:0.65em;opacity:0.65;font-weight:400;">| 设计总监版</span>`;
-                let seriesStr = Array.from(selectedSeriesSet).join('/') || '国风';
-                let subStr = Array.from(selectedSubStyleSet).join('/') || '传统';
-                subtitleText.textContent = `正立面视角 · 20组方案 · ${seriesStr}·${subStr}`;
-            }
-            projectDescInput.addEventListener('input', updateProjectDescDisplay);
-            
-            function syncSize(source) {
-                if (!lockRatioCheck.checked) return;
-                const w = parseFloat(widthInput.value), h = parseFloat(heightInput.value);
-                if (source === 'width' && !isNaN(w)) heightInput.value = (w / 1.777).toFixed(2);
-                else if (source === 'height' && !isNaN(h)) widthInput.value = (h * 1.777).toFixed(1);
-            }
-            widthInput.addEventListener('input', () => syncSize('width'));
-            heightInput.addEventListener('input', () => syncSize('height'));
-            lockRatioCheck.addEventListener('change', () => { if (lockRatioCheck.checked) syncSize('width'); });
-            
-            function setupCollapse(headerId, bodyId) {
-                const h = document.getElementById(headerId), b = document.getElementById(bodyId);
-                if (!h || !b) return;
-                h.addEventListener('click', () => {
-                    const open = b.classList.contains('expanded');
-                    if (open) { b.classList.remove('expanded'); h.classList.remove('open'); } 
-                    else { b.classList.add('expanded'); h.classList.add('open'); }
-                });
-            }
-            
-            function setLoading() {
-                promptsListDiv.innerHTML = '<div class="prompt-item" style="background:#26241e;text-align:center;padding:40px;"><div class="prompt-number">🏮 ⏳</div><div class="prompt-text" style="color:#aa9f84;">设计总监正在构思20组方案…</div></div>';
-                countDisplay.innerText = '0/20';
-                extraOutput.style.display = 'none';
-            }
-            
-            async function performCopy(text) {
-                if (navigator.clipboard?.writeText) { try { await navigator.clipboard.writeText(text); return true; } catch(e) {} }
-                try { const ta = document.createElement('textarea'); ta.value = text; ta.style.cssText = 'position:fixed;left:-9999px;'; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); return true; } catch(e) { return false; }
-            }
-            
-            function setupCopyButtons() {
-                document.querySelectorAll('.copy-btn').forEach(btn => {
-                    const newBtn = btn.cloneNode(true);
-                    btn.parentNode.replaceChild(newBtn, btn);
-                    newBtn.addEventListener('click', async function(e) {
-                        e.preventDefault();
-                        const idx = parseInt(this.dataset.index, 10);
-                        if (isNaN(idx) || idx < 0 || idx >= currentPrompts.length) { alert('请重新生成'); return; }
-                        const text = currentPrompts[idx];
-                        this.disabled = true;
-                        const orig = this.innerHTML;
-                        const ok = await performCopy(text);
-                        if (ok) { this.innerHTML = '✓ 已复制'; this.classList.add('copied'); setTimeout(() => { this.innerHTML = orig; this.classList.remove('copied'); this.disabled = false; }, 2000); } 
-                        else { this.innerHTML = '📋 已选中，Ctrl+C复制'; this.classList.add('copied'); setTimeout(() => { this.innerHTML = orig; this.classList.remove('copied'); this.disabled = false; }, 3000); }
-                    });
-                });
-            }
-            
-            function generatePrompts(p) {
-                const { projectDesc, userW, userH } = p;
-                const elemArr = Array.from(selectedElementsSet);
-                const mainElem = elemArr[0] || '祥云';
-                const subElemStr = elemArr.slice(1, 4).join('、') || mainElem;
-                const allElems = elemArr.join('、');
-                const bg = Array.from(selectedVenueSet).join('/') || '干净米白纯色背景';
-                let fW, fH;
-                if (userW && !isNaN(userW) && userW > 0) { fW = parseFloat(userW).toFixed(1); fH = (userH && !isNaN(userH) && userH > 0) ? parseFloat(userH).toFixed(2) : (fW / 1.777).toFixed(2); } 
-                else { fW = (Math.floor(Math.random() * 5) + 8).toFixed(1); fH = (fW / 1.777).toFixed(2); }
-                const dims = `装置总宽度${fW}米，高度${fH}米，严格16:9宽屏比例`;
-                const projectText = projectDesc ? `项目"${projectDesc}"` : '';
-                const seriesStr = Array.from(selectedSeriesSet).join('/');
-                const subStyleStr = Array.from(selectedSubStyleSet).join('/');
-                const styleTagStr = Array.from(selectedStyleTagSet).join('/');
-                const colorStr = Array.from(selectedColorSet).join('+');
-                const materialStr = Array.from(selectedMaterialSet).join('+');
-                const lightStr = Array.from(selectedLightSet).join('+') + (Array.from(selectedLightEffectSet).length ? ` + 动态:${Array.from(selectedLightEffectSet).join('+')}` : '');
-                const structureStr = Array.from(selectedStructureSet).join('/');
-                const interactionStr = Array.from(selectedInteractionPrefSet).join('/');
-                const contentTypeStr = Array.from(selectedContentTypeSet).join('/');
-                const storyStr = Array.from(selectedStorySet).join('/');
-                const interactStr = Array.from(selectedInteractSet).join('/');
-                const budgetStr = Array.from(selectedBudgetSet).join('/');
-                const installStr = Array.from(selectedInstallSet).join('/');
-                const timeStr = Array.from(selectedTimeSet).join('/');
-                
-                const designs = [];
-                const namePool = ['牌楼迎祥','画卷纳福','宫灯连廊','窗棂格韵','流云飘带','如意连环','编钟古韵','龙凤呈祥','纹样织锦','书卷吉祥','花团锦簇','折扇宏开','皮影叙事','月洞穿景','聚宝盆溢','鱼跃龙门','中国结艺','飞檐翘角','屏风叠翠','剪纸层叠'];
-                for(let i=0;i<20;i++) {
-                    designs.push({ name: namePool[i % namePool.length], mat: materialStr.split('+')[0], lit: lightStr.split('+')[0] });
-                }
-                const prompts = designs.map((d, i) => {
-                    return `【${String(i+1).padStart(2,'0')} ${d.name}】正立面视角，风格系列:${seriesStr}，具体风格:${subStyleStr}，风格标签:${styleTagStr}，横向超宽美陈装置，${dims}，结构:${structureStr}，背景为${bg}，构图居中偏下留白≥30%。核心元素融合${allElems}，立体造型突出${mainElem}与${subElemStr}。色彩以${colorStr}为主，主色不超过3种，材质选用${materialStr}形成质感反差，灯光布局${lightStr}。内容侧重${contentTypeStr}，互动形式偏向${interactionStr}，故事线融入${storyStr}元素，支持${interactStr}，设计适配${timeStr}展示，预算${budgetStr}，安装要求${installStr}。画面具有明确视觉锚点适合打卡拍照，写实3D效果图，16:9画幅，8k，正面完整展示，无透视变形。`;
-                });
-                return { prompts, designs };
-            }
-            
-            function renderPrompts(prompts, designs) {
-                if (!prompts?.length) {
-                    promptsListDiv.innerHTML = '<div class="prompt-item" style="background:#26241e;text-align:center;padding:40px;"><div class="prompt-number">🏮 ⚠️</div><div class="prompt-text" style="color:#aa9f84;">生成失败，请重试</div></div>';
-                    countDisplay.innerText = '0/20';
-                    extraOutput.style.display = 'none';
-                    return;
-                }
-                let html = '';
-                prompts.forEach((p, i) => {
-                    const d = designs[i];
-                    html += `<div class="prompt-item">
-                        <div class="prompt-number">🏮 第${i+1}组 · ${d.name}</div>
-                        <div class="prompt-meta"><span class="meta-tag">📐 ${d.mat}</span><span class="meta-tag">💡 ${d.lit}</span></div>
-                        <div class="prompt-text">${p}</div>
-                        <button class="copy-btn" data-index="${i}">📋 复制</button>
-                    </div>`;
-                });
-                promptsListDiv.innerHTML = html;
-                countDisplay.innerText = `${prompts.length}/20`;
-                setupCopyButtons();
-                const allMats = Array.from(selectedMaterialSet).slice(0, 5).join('、');
-                const allLits = Array.from(selectedLightSet).slice(0, 5).join('、');
-                extraContent.innerHTML = `📦 <b>主要材料类型：</b>${allMats}<br>💡 <b>灯光系统汇总：</b>${allLits}<br>🔧 <b>安装建议：</b>${Array.from(selectedInstallSet).join('/')} | <b>预算：</b>${Array.from(selectedBudgetSet).join('/')}<br>🕐 <b>展示模式：</b>${Array.from(selectedTimeSet).join('/')} | <b>互动玩法：</b>${Array.from(selectedInteractSet).join('/')}<br>📖 <b>故事线：</b>${Array.from(selectedStorySet).join('/')} | <b>结构：</b>${Array.from(selectedStructureSet).join('/')}<br>📝 <b>项目描述：</b>${projectDescInput.value || '美陈古月智能体'}<br>📐 <b>尺寸：</b>宽${widthInput.value}米 × 高${heightInput.value}米 · 16:9`;
-                extraOutput.style.display = 'block';
-            }
-            
-            function handleGenerate() {
-                const params = {
-                    projectDesc: projectDescInput.value.trim() || '美陈古月智能体',
-                    userW: parseFloat(widthInput.value),
-                    userH: parseFloat(heightInput.value)
-                };
-                setLoading();
-                setTimeout(() => {
-                    try {
-                        const result = generatePrompts(params);
-                        currentPrompts = result.prompts;
-                        renderPrompts(result.prompts, result.designs);
-                    } catch (e) {
-                        promptsListDiv.innerHTML = `<div class="prompt-item"><div class="prompt-number">🏮 ❌</div><div class="prompt-text">生成出错: ${e.message}</div></div>`;
-                        countDisplay.innerText = '0/20';
-                        extraOutput.style.display = 'none';
-                    }
-                }, 150);
-            }
-            generateBtn.addEventListener('click', handleGenerate);
-            
-            function init() {
-                updateProjectDescDisplay();
-                renderAll();
-                setupCollapse('materialHeader', 'materialBody');
-                setupCollapse('lightHeader', 'lightBody');
-                setupCollapse('advancedHeader', 'advancedBody');
-                document.getElementById('materialBody').classList.add('expanded');
-                document.getElementById('materialHeader').classList.add('open');
-                setTimeout(handleGenerate, 300);
-            }
-            window.addEventListener('load', init);
-        })();
-    </script>
+                renderCoreElements(); // 重新渲染以高亮
+            });
+        });
+        updateElemDisplay();
+    }
+    function updateElemDisplay() {
+        const arr = Array.from(selectedElementsSet);
+        document.getElementById('selectedElemDisplay').innerHTML = `当前选中元素: ${arr.join(' · ') || '无'}`;
+    }
+    function renderAll() {
+        renderMultiSelect('seriesBtns', seriesOptions, selectedSeriesSet, () => { renderSubStyleMulti(); });
+        renderSubStyleMulti();
+        renderMultiSelect('styleTagBtns', styleTagList, selectedStyleTagSet);
+        renderMultiSelect('venueBtns', venueFullList, selectedVenueSet);
+        renderColorMultiSelect();
+        renderMultiSelect('materialBtns', materialFullList, selectedMaterialSet);
+        renderMultiSelect('lightBtns', lightFullList, selectedLightSet);
+        renderMultiSelect('lightEffectBtns', lightEffectModes, selectedLightEffectSet);
+        renderMultiSelect('structureBtns', structureFullList, selectedStructureSet);
+        renderMultiSelect('interactionPrefBtns', interactionPrefList, selectedInteractionPrefSet);
+        renderMultiSelect('contentTypeBtns', contentTypeList, selectedContentTypeSet);
+        renderMultiSelect('storyBtns', storyList, selectedStorySet);
+        renderMultiSelect('interactBtns', interactList, selectedInteractSet);
+        renderMultiSelect('budgetBtns', budgetList, selectedBudgetSet);
+        renderMultiSelect('installBtns', installList, selectedInstallSet);
+        renderMultiSelect('timeBtns', timeList, selectedTimeSet);
+        // 节日主题按钮（多选）
+        renderMultiSelect('festivalBtns', festivalList, selectedFestivalsSet);
+        renderCoreElements();
+    }
+    function updateProjectDescDisplay() {
+        let desc = projectDescInput.value.trim() || '美陈古月智能体';
+        frameProjectDesc.textContent = desc;
+        mainTitle.innerHTML = `🏮 ${desc} <span style="font-size:0.65em;">| 设计总监版</span>`;
+        subtitleText.textContent = `正立面 · 自由多选 · 无默认强加`;
+    }
+    projectDescInput.addEventListener('input', updateProjectDescDisplay);
+    function syncSize(source) { if(!lockRatioCheck.checked) return; let w=parseFloat(widthInput.value), h=parseFloat(heightInput.value); if(source==='width'&&!isNaN(w)) heightInput.value=(w/1.777).toFixed(2); else if(source==='height'&&!isNaN(h)) widthInput.value=(h*1.777).toFixed(1); }
+    widthInput.addEventListener('input',()=>syncSize('width')); heightInput.addEventListener('input',()=>syncSize('height'));
+    function setupCollapse(idH,idB) { let h=document.getElementById(idH), b=document.getElementById(idB); if(h&&b) h.addEventListener('click',()=>{ let open=b.classList.contains('expanded'); if(open){b.classList.remove('expanded');h.classList.remove('open');}else{b.classList.add('expanded');h.classList.add('open');} }); }
+    function setLoading() { promptsListDiv.innerHTML='<div class="prompt-item"><div class="prompt-number">⏳ 生成中</div><div class="prompt-text">正在根据您的选择生成20组方案...</div></div>'; countDisplay.innerText='0/20'; extraOutput.style.display='none'; }
+    async function performCopy(text) { try { await navigator.clipboard.writeText(text); return true; } catch(e) { try { const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); return true; } catch(err){ return false; } } }
+    function setupCopyButtons() { document.querySelectorAll('.copy-btn').forEach(btn => { const newBtn=btn.cloneNode(true); btn.parentNode.replaceChild(newBtn,btn); newBtn.addEventListener('click',async function(e){ e.preventDefault(); const idx=parseInt(this.dataset.index); if(isNaN(idx)||idx<0||idx>=currentPrompts.length){ alert('请重新生成'); return; } const text=currentPrompts[idx]; this.disabled=true; const orig=this.innerHTML; const ok=await performCopy(text); if(ok){ this.innerHTML='✓ 已复制'; this.classList.add('copied'); setTimeout(()=>{ this.innerHTML=orig; this.classList.remove('copied'); this.disabled=false; },2000); } else { this.innerHTML='📋 手动复制'; setTimeout(()=>{ this.innerHTML=orig; this.disabled=false; },2000); } }); }); }
+    function generatePrompts(p) {
+        const { projectDesc, userW, userH } = p;
+        const elemArr = Array.from(selectedElementsSet);
+        const bgArr = Array.from(selectedVenueSet);
+        let parts = [];
+        if(selectedSeriesSet.size) parts.push(`风格系列:${Array.from(selectedSeriesSet).join('/')}`);
+        if(selectedSubStyleSet.size) parts.push(`具体风格:${Array.from(selectedSubStyleSet).join('/')}`);
+        if(selectedStyleTagSet.size) parts.push(`风格标签:${Array.from(selectedStyleTagSet).join('/')}`);
+        if(bgArr.length) parts.push(`背景场地:${bgArr.join('/')}`);
+        if(selectedFestivalsSet.size) parts.push(`节日主题:${Array.from(selectedFestivalsSet).join('/')}`);
+        if(elemArr.length) parts.push(`核心元素:${elemArr.join('·')}`);
+        if(selectedColorSet.size) parts.push(`主色调:${Array.from(selectedColorSet).join('+')}`);
+        if(selectedMaterialSet.size) parts.push(`材质:${Array.from(selectedMaterialSet).join('+')}`);
+        let lightDesc = '';
+        if(selectedLightSet.size) lightDesc = Array.from(selectedLightSet).join('+');
+        if(selectedLightEffectSet.size) lightDesc += (lightDesc?' + 动态:':'动态:') + Array.from(selectedLightEffectSet).join('+');
+        if(lightDesc) parts.push(`灯光:${lightDesc}`);
+        if(selectedStructureSet.size) parts.push(`结构:${Array.from(selectedStructureSet).join('/')}`);
+        if(selectedInteractionPrefSet.size) parts.push(`互动偏好:${Array.from(selectedInteractionPrefSet).join('/')}`);
+        if(selectedContentTypeSet.size) parts.push(`内容侧重:${Array.from(selectedContentTypeSet).join('/')}`);
+        if(selectedStorySet.size) parts.push(`故事线:${Array.from(selectedStorySet).join('/')}`);
+        if(selectedInteractSet.size) parts.push(`互动玩法:${Array.from(selectedInteractSet).join('/')}`);
+        if(selectedBudgetSet.size) parts.push(`预算:${Array.from(selectedBudgetSet).join('/')}`);
+        if(selectedInstallSet.size) parts.push(`安装要求:${Array.from(selectedInstallSet).join('/')}`);
+        if(selectedTimeSet.size) parts.push(`适配时间:${Array.from(selectedTimeSet).join('/')}`);
+        let fW,fH;
+        if(userW && !isNaN(userW) && userW>0) { fW=parseFloat(userW).toFixed(1); fH=(userH && !isNaN(userH) && userH>0)?parseFloat(userH).toFixed(2):(fW/1.777).toFixed(2); }
+        else { fW=(Math.floor(Math.random()*5)+8).toFixed(1); fH=(fW/1.777).toFixed(2); }
+        const dims = `装置总宽度${fW}米，高度${fH}米，16:9比例`;
+        const descStr = parts.length ? `，${parts.join('，')}` : '';
+        const designs = [];
+        const namePool = ['牌楼迎祥','画卷纳福','宫灯连廊','窗棂格韵','流云飘带','如意连环','编钟古韵','龙凤呈祥','纹样织锦','书卷吉祥','花团锦簇','折扇宏开','皮影叙事','月洞穿景','聚宝盆溢','鱼跃龙门','中国结艺','飞檐翘角','屏风叠翠','剪纸层叠'];
+        for(let i=0;i<20;i++) designs.push({ name: namePool[i%namePool.length] });
+        const prompts = designs.map((d,i) => `【${String(i+1).padStart(2,'0')} ${d.name}】正立面视角横向超宽美陈装置，${dims}，构图居中偏下留白≥30%${descStr}。画面具有明确视觉锚点适合打卡拍照，写实3D效果图，16:9画幅，8k，正面完整展示，无透视变形。`);
+        return { prompts, designs };
+    }
+    function renderPrompts(prompts, designs) {
+        if(!prompts.length){ promptsListDiv.innerHTML='<div class="prompt-item">生成失败</div>'; return; }
+        let html='';
+        prompts.forEach((p,i)=>{ html+=`<div class="prompt-item"><div class="prompt-number">🏮 第${i+1}组 · ${designs[i].name}</div><div class="prompt-text">${p}</div><button class="copy-btn" data-index="${i}">📋 复制</button></div>`; });
+        promptsListDiv.innerHTML=html; countDisplay.innerText=`${prompts.length}/20`;
+        setupCopyButtons();
+        const selectedCount = {
+            风格系列:selectedSeriesSet.size, 具体风格:selectedSubStyleSet.size, 风格标签:selectedStyleTagSet.size,
+            场地:selectedVenueSet.size, 节日:selectedFestivalsSet.size, 元素:selectedElementsSet.size, 色彩:selectedColorSet.size,
+            材质:selectedMaterialSet.size, 灯光:selectedLightSet.size+selectedLightEffectSet.size, 结构:selectedStructureSet.size,
+            互动:selectedInteractionPrefSet.size, 内容:selectedContentTypeSet.size, 故事:selectedStorySet.size,
+            玩法:selectedInteractSet.size, 预算:selectedBudgetSet.size, 安装:selectedInstallSet.size, 时间:selectedTimeSet.size
+        };
+        extraContent.innerHTML = `📊 已选板块统计：${Object.entries(selectedCount).filter(([k,v])=>v>0).map(([k,v])=>`${k}(${v})`).join(' · ') || '无任何选择，仅输出基础框架'}<br>📝 项目描述：${projectDescInput.value}<br>📐 尺寸：${widthInput.value}×${heightInput.value}米`;
+        extraOutput.style.display='block';
+    }
+    function handleGenerate() { setLoading(); setTimeout(()=>{ const result=generatePrompts({ projectDesc:projectDescInput.value.trim()||'美陈古月智能体', userW:parseFloat(widthInput.value), userH:parseFloat(heightInput.value) }); currentPrompts=result.prompts; renderPrompts(result.prompts,result.designs); },150); }
+    generateBtn.addEventListener('click', handleGenerate);
+    document.getElementById('clearElemBtn').addEventListener('click',()=>{ selectedElementsSet.clear(); renderCoreElements(); updateElemDisplay(); });
+    function init() { updateProjectDescDisplay(); renderAll(); setupCollapse('materialHeader','materialBody'); setupCollapse('lightHeader','lightBody'); setupCollapse('advancedHeader','advancedBody'); document.getElementById('materialBody').classList.add('expanded'); document.getElementById('materialHeader').classList.add('open'); setTimeout(handleGenerate,300); }
+    window.addEventListener('load', init);
+})();
+</script>
 </body>
 </html>
