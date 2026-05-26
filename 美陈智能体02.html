@@ -47,13 +47,66 @@
             flex-direction: column;
             gap: 14px;
         }
-        .header-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
-        .header h1 { font-size: 26px; font-weight: 600; letter-spacing: 2.5px; background: linear-gradient(180deg, #f5e7c6 0%, #c9a45c 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-family: var(--font-heading); white-space: nowrap; }
-        .header .subtitle { font-size: 13px; color: #cfc3a6; background: rgba(201, 164, 92, 0.08); padding: 7px 20px; border-radius: 30px; border: 1px solid rgba(201, 164, 92, 0.35); white-space: nowrap; }
-        .project-desc-frame { background: rgba(20, 18, 14, 0.8); backdrop-filter: blur(12px); border: 2px solid rgba(201, 164, 92, 0.45); border-radius: 22px; padding: 16px 26px; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
-        .frame-item { display: flex; align-items: baseline; gap: 8px; }
-        .frame-label { font-size: 11px; color: #9b927a; letter-spacing: 1px; text-transform: uppercase; }
-        .frame-value { font-size: 19px; font-weight: 600; color: #ecd69b; letter-spacing: 2px; font-family: var(--font-heading); border-bottom: 2px dashed rgba(201, 164, 92, 0.45); }
+        .header-top { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+        /* 主标题固定不变 */
+        .header h1 { 
+            font-size: 26px; 
+            font-weight: 600; 
+            letter-spacing: 2.5px; 
+            background: linear-gradient(180deg, #f5e7c6 0%, #c9a45c 80%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            background-clip: text; 
+            font-family: var(--font-heading); 
+            white-space: nowrap; 
+        }
+        .header .subtitle { 
+            font-size: 13px; 
+            color: #cfc3a6; 
+            background: rgba(201, 164, 92, 0.08); 
+            padding: 7px 20px; 
+            border-radius: 30px; 
+            border: 1px solid rgba(201, 164, 92, 0.35); 
+            white-space: nowrap; 
+        }
+        /* 优化项目描述图框：更精致 */
+        .project-desc-frame {
+            background: rgba(20, 18, 14, 0.75);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(201, 164, 92, 0.6);
+            border-radius: 40px;
+            padding: 12px 28px;
+            margin-top: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+            width: auto;
+            align-self: flex-start;
+        }
+        .frame-item {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+        .frame-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #dac292;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .frame-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #f7e9c3;
+            letter-spacing: 1px;
+            font-family: var(--font-heading);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+            border-bottom: 2px solid rgba(201, 164, 92, 0.7);
+            padding-bottom: 3px;
+        }
         .main { display: flex; flex-wrap: wrap; }
         .input-section, .output-section { flex: 1; min-width: 440px; padding: 26px 22px; max-height: 85vh; overflow-y: auto; background: rgba(42, 42, 38, 0.7); backdrop-filter: blur(12px); }
         .input-section { border-right: 1px solid rgba(74, 63, 46, 0.5); }
@@ -93,8 +146,17 @@
 <body>
 <div class="generator-card">
     <div class="header">
-        <div class="header-top"><h1 id="mainTitle">🏮 商业美陈AI提示词 · 设计总监版</h1><span class="subtitle" id="subtitleText">自由多选 · 无默认强加</span></div>
-        <div class="project-desc-frame"><div class="frame-item"><span class="frame-label">项目描述</span><span class="frame-value" id="frameProjectDesc">美陈古月智能体</span></div></div>
+        <div class="header-top">
+            <!-- 主标题固定，不再随项目描述更改 -->
+            <h1>🏮 美陈古月智能体 | 设计总监版</h1>
+            <span class="subtitle">正立面 · 自由多选 · 无默认强加</span>
+        </div>
+        <div class="project-desc-frame">
+            <div class="frame-item">
+                <span class="frame-label">项目描述</span>
+                <span class="frame-value" id="frameProjectDesc">美陈古月智能体</span>
+            </div>
+        </div>
     </div>
     <div class="main">
         <div class="input-section">
@@ -103,10 +165,7 @@
             <div><div class="section-title"><span>📌</span> 具体风格 (多选·可不选)</div><div class="btn-row" id="subStyleBtns"></div></div>
             <div><div class="section-title"><span>🏷️</span> 风格标签 (多选·可不选)</div><div class="btn-row" id="styleTagBtns"></div></div>
             <div><div class="section-title"><span>🏢</span> 场地背景 (多选·可不选)</div><div class="btn-row" id="venueBtns"></div></div>
-            <!-- 节日主题：多选按钮，不选则显示通用库 -->
-            <div><div class="section-title"><span>🎎</span> 节日主题 (多选·可不选)</div>
-                <div class="btn-row" id="festivalBtns"></div>
-            </div>
+            <div><div class="section-title"><span>🎎</span> 节日主题 (多选·可不选)</div><div class="btn-row" id="festivalBtns"></div></div>
             <div><div class="section-title"><span>✨</span> 核心元素 <span style="font-size:10px;color:#9b927a;">(多选·可不选)</span></div>
                 <div id="coreElementPanel" class="element-picker"></div>
                 <div class="selected-elem-area" id="selectedElemDisplay">当前选中元素: 无</div>
@@ -128,14 +187,14 @@
         <div class="output-section">
             <div class="output-header"><h2>🎐 AI绘画提示词</h2><span class="badge" id="countDisplay">0/20</span></div>
             <div class="prompts-grid" id="promptsList"></div>
-            <div class="footer-note">⚡ 每组独立设计 · 仅输出已选择的板块 · 完全尊重用户选择</div>
+            <div class="footer-note">⚡ 每组独立设计 · 仅输出已选择的板块 · 20组提示词内容完全不重复</div>
             <div class="extra-output" id="extraOutput"><h4>📋 批量施工摘要</h4><p id="extraContent"></p></div>
         </div>
     </div>
 </div>
 <script>
 (function(){
-    // ---------- 数据定义 ----------
+    // ---------- 通用元素库（未选节日时展示）----------
     const fullElementsLibrary = {
         "吉祥类": ["祥云","如意纹","回纹","瑞兽纹","八宝纹","金元宝","铜钱","福袋","福字","财字","招财猫","聚宝盆","玉佩","印章","宫灯","华盖","龙纹","凤纹","麒麟","貔貅","仙鹤","锦鲤","金鱼"],
         "花卉类": ["牡丹","梅花","兰花","竹子","菊花","荷花","桃花","樱花","山茶花","桂花","银杏叶","枫叶"],
@@ -147,6 +206,7 @@
         "科技未来": ["科技线条","数据流","光纤灯","几何矩阵","发光圆环","悬浮立方体","AI芯片纹理","星际轨道","能量核心","机械结构","镭射镜面","全息屏","数字粒子","激光矩阵"],
         "艺术装置": ["镜面不锈钢","气膜装置","悬浮雕塑","几何艺术体","动态风车","风动装置","镜面球","光影雕塑","巨型字母","艺术拱门","异形结构","参数化曲面"]
     };
+    // 节日元素映射（完整版）
     const festivalElementsMap = {
         "春节": ["福字","中国结","灯笼","红包","金元宝","铜钱","祥云","牡丹","烟花","舞狮","舞龙","财神","鞭炮","梅花","窗花","宫灯","灯笼长廊","年兽","锦鲤","金龙","祈福树","春联","剪纸","如意","金扇","国潮纹样","红绸","金色波浪纹","鼓","戏曲元素","祥云拱门","灯海","新年IP","醒狮装置","金色麦穗","稻穗","发财树","龙凤","玉佩","琉璃球","流苏","金色屏风","古建筑屋檐","城门楼","金色卷轴","国风市集","烟火艺术装置"],
         "元宵节": ["花灯","鱼灯","兔子灯","宫灯","荷花灯","灯谜","月亮","玉兔","烟火","灯海","灯笼矩阵","古风长街","光影长廊","星空灯","祈愿牌","河灯","水纹","传统窗棂","彩灯树","福袋","锦鲤灯","古风桥梁","灯塔","月宫","桂花树","团圆餐桌","暖黄色光源","国潮插画","发光兔子","古建筑","汉服人物","彩色灯串","琉璃灯","诗词灯牌"],
@@ -172,12 +232,12 @@
         "电竞节": ["科技蓝光","机械风","未来城市","电竞角色","能量核心","悬浮装置","数字矩阵","赛博朋克","游戏地图","发光键盘","电子纹理","金属结构","电竞舞台","动态屏幕","AI光效","未来机甲","虚拟角色","电竞LOGO","能量通道","光影隧道"],
         "文旅灯会": ["大型灯组","国潮IP","花灯","巨型月亮","神话人物","古建筑","灯海","水景","互动投影","无人机灯光","数字光影","沉浸式场景","古风长街","巨型生肖","神兽","流光瀑布","光影森林","全息投影","发光雕塑","巨型花艺","机械灯光秀"]
     };
-    // 所有节日列表（不含“通用”）
     const festivalList = ["春节","元宵节","清明节","端午节","七夕节","中秋节","重阳节","冬至","国庆节","圣诞节","万圣节","情人节","妇女节/女神节","儿童节","毕业季","618","双11","双12","店庆","开业庆典","音乐节","电竞节","文旅灯会"];
     
     let selectedElementsSet = new Set();
     let selectedFestivalsSet = new Set();  // 多选节日
 
+    // 色彩、材质等选项列表...
     const colorFullList = [
         "中国红","帝王黄","宝石蓝","孔雀绿","翡翠绿","松石绿","深海蓝","星空黑","珍珠白","奶油白","雾霾灰","银灰色","香槟金","古铜金","玫瑰金","哑光黑",
         "红金配色","黑金配色","朱砂红+鎏金","中国红+祥云金","故宫红+琉璃黄","赤金色","龙鳞金","宫廷蓝金","墨绿色+古金","丹霞橙+金",
@@ -216,8 +276,6 @@
     // DOM 元素
     const projectDescInput = document.getElementById('projectDescInput');
     const frameProjectDesc = document.getElementById('frameProjectDesc');
-    const mainTitle = document.getElementById('mainTitle');
-    const subtitleText = document.getElementById('subtitleText');
     const generateBtn = document.getElementById('generateBtn');
     const promptsListDiv = document.getElementById('promptsList');
     const countDisplay = document.getElementById('countDisplay');
@@ -269,10 +327,7 @@
                 else selectedSet.add(val);
                 if(onChange) onChange();
                 refreshSelections(containerId, selectedSet);
-                // 如果节日选择变化，需刷新核心元素库
-                if(containerId === 'festivalBtns') {
-                    renderCoreElements();
-                }
+                if(containerId === 'festivalBtns') renderCoreElements();
             });
         });
     }
@@ -318,11 +373,9 @@
             });
         });
     }
-    // 核心元素渲染：根据选中的节日合并元素库
     function renderCoreElements() {
         let elementSet = new Set();
         if(selectedFestivalsSet.size === 0) {
-            // 未选任何节日：展示通用分类库
             let html = '';
             for(let [cat, items] of Object.entries(fullElementsLibrary)) {
                 html += `<div style="margin-bottom:16px;"><div style="color:#e5c67a; font-size:12px; margin-bottom:8px;">📌 ${cat}</div><div class="ele-grid">`;
@@ -334,7 +387,6 @@
             }
             document.getElementById('coreElementPanel').innerHTML = html;
         } else {
-            // 合并所有选中节日的元素
             for(let fest of selectedFestivalsSet) {
                 const arr = festivalElementsMap[fest] || [];
                 arr.forEach(e => elementSet.add(e));
@@ -348,14 +400,13 @@
             html += `</div>`;
             document.getElementById('coreElementPanel').innerHTML = html;
         }
-        // 绑定点击事件
         document.querySelectorAll('.elem-badge').forEach(el => {
             el.addEventListener('click', () => {
                 const elem = el.dataset.elem;
                 if(selectedElementsSet.has(elem)) selectedElementsSet.delete(elem);
                 else selectedElementsSet.add(elem);
                 updateElemDisplay();
-                renderCoreElements(); // 重新渲染以高亮
+                renderCoreElements();
             });
         });
         updateElemDisplay();
@@ -381,27 +432,28 @@
         renderMultiSelect('budgetBtns', budgetList, selectedBudgetSet);
         renderMultiSelect('installBtns', installList, selectedInstallSet);
         renderMultiSelect('timeBtns', timeList, selectedTimeSet);
-        // 节日主题按钮（多选）
         renderMultiSelect('festivalBtns', festivalList, selectedFestivalsSet);
         renderCoreElements();
     }
     function updateProjectDescDisplay() {
         let desc = projectDescInput.value.trim() || '美陈古月智能体';
         frameProjectDesc.textContent = desc;
-        mainTitle.innerHTML = `🏮 ${desc} <span style="font-size:0.65em;">| 设计总监版</span>`;
-        subtitleText.textContent = `正立面 · 自由多选 · 无默认强加`;
+        // 主标题不再随项目描述更改，保持固定
     }
     projectDescInput.addEventListener('input', updateProjectDescDisplay);
     function syncSize(source) { if(!lockRatioCheck.checked) return; let w=parseFloat(widthInput.value), h=parseFloat(heightInput.value); if(source==='width'&&!isNaN(w)) heightInput.value=(w/1.777).toFixed(2); else if(source==='height'&&!isNaN(h)) widthInput.value=(h*1.777).toFixed(1); }
     widthInput.addEventListener('input',()=>syncSize('width')); heightInput.addEventListener('input',()=>syncSize('height'));
     function setupCollapse(idH,idB) { let h=document.getElementById(idH), b=document.getElementById(idB); if(h&&b) h.addEventListener('click',()=>{ let open=b.classList.contains('expanded'); if(open){b.classList.remove('expanded');h.classList.remove('open');}else{b.classList.add('expanded');h.classList.add('open');} }); }
-    function setLoading() { promptsListDiv.innerHTML='<div class="prompt-item"><div class="prompt-number">⏳ 生成中</div><div class="prompt-text">正在根据您的选择生成20组方案...</div></div>'; countDisplay.innerText='0/20'; extraOutput.style.display='none'; }
+    function setLoading() { promptsListDiv.innerHTML='<div class="prompt-item"><div class="prompt-number">⏳ 生成中</div><div class="prompt-text">正在根据您的选择生成20组不重复方案...</div></div>'; countDisplay.innerText='0/20'; extraOutput.style.display='none'; }
     async function performCopy(text) { try { await navigator.clipboard.writeText(text); return true; } catch(e) { try { const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); return true; } catch(err){ return false; } } }
     function setupCopyButtons() { document.querySelectorAll('.copy-btn').forEach(btn => { const newBtn=btn.cloneNode(true); btn.parentNode.replaceChild(newBtn,btn); newBtn.addEventListener('click',async function(e){ e.preventDefault(); const idx=parseInt(this.dataset.index); if(isNaN(idx)||idx<0||idx>=currentPrompts.length){ alert('请重新生成'); return; } const text=currentPrompts[idx]; this.disabled=true; const orig=this.innerHTML; const ok=await performCopy(text); if(ok){ this.innerHTML='✓ 已复制'; this.classList.add('copied'); setTimeout(()=>{ this.innerHTML=orig; this.classList.remove('copied'); this.disabled=false; },2000); } else { this.innerHTML='📋 手动复制'; setTimeout(()=>{ this.innerHTML=orig; this.disabled=false; },2000); } }); }); }
+    
+    // 生成20组完全不重复的提示词
     function generatePrompts(p) {
         const { projectDesc, userW, userH } = p;
         const elemArr = Array.from(selectedElementsSet);
         const bgArr = Array.from(selectedVenueSet);
+        
         let parts = [];
         if(selectedSeriesSet.size) parts.push(`风格系列:${Array.from(selectedSeriesSet).join('/')}`);
         if(selectedSubStyleSet.size) parts.push(`具体风格:${Array.from(selectedSubStyleSet).join('/')}`);
@@ -423,17 +475,43 @@
         if(selectedBudgetSet.size) parts.push(`预算:${Array.from(selectedBudgetSet).join('/')}`);
         if(selectedInstallSet.size) parts.push(`安装要求:${Array.from(selectedInstallSet).join('/')}`);
         if(selectedTimeSet.size) parts.push(`适配时间:${Array.from(selectedTimeSet).join('/')}`);
+        
         let fW,fH;
         if(userW && !isNaN(userW) && userW>0) { fW=parseFloat(userW).toFixed(1); fH=(userH && !isNaN(userH) && userH>0)?parseFloat(userH).toFixed(2):(fW/1.777).toFixed(2); }
         else { fW=(Math.floor(Math.random()*5)+8).toFixed(1); fH=(fW/1.777).toFixed(2); }
         const dims = `装置总宽度${fW}米，高度${fH}米，16:9比例`;
         const descStr = parts.length ? `，${parts.join('，')}` : '';
-        const designs = [];
-        const namePool = ['牌楼迎祥','画卷纳福','宫灯连廊','窗棂格韵','流云飘带','如意连环','编钟古韵','龙凤呈祥','纹样织锦','书卷吉祥','花团锦簇','折扇宏开','皮影叙事','月洞穿景','聚宝盆溢','鱼跃龙门','中国结艺','飞檐翘角','屏风叠翠','剪纸层叠'];
-        for(let i=0;i<20;i++) designs.push({ name: namePool[i%namePool.length] });
-        const prompts = designs.map((d,i) => `【${String(i+1).padStart(2,'0')} ${d.name}】正立面视角横向超宽美陈装置，${dims}，构图居中偏下留白≥30%${descStr}。画面具有明确视觉锚点适合打卡拍照，写实3D效果图，16:9画幅，8k，正面完整展示，无透视变形。`);
-        return { prompts, designs };
+        
+        // 20个不同的设计主题，确保每组内容完全不重复
+        const designThemes = [
+            { name: "牌楼迎祥", desc: "仿古牌楼造型，八根红色亚克力圆柱横向排列，柱身浮雕吉祥纹样，横梁金色镂空板，中央鎏金牌匾悬嵌主题，地面圆形镜面地毯倒映暖光。" },
+            { name: "画卷纳福", desc: "巨型画卷横向展开，两端立体祥云泡沫雕塑，画卷表面满印吉祥图案，画心凹入安装亚克力发光字，背景留白米灰色。" },
+            { name: "宫灯连廊", desc: "十盏传统宫灯横向连排，灯面镂空祥云纹样，灯内暖光透出，灯间红色绸带相连，中央放大宫灯突出主题。" },
+            { name: "窗棂格韵", desc: "整面海棠纹窗棂格栅横向铺满，深红木质格栅间贴金箔纹饰，中心留白区域安装亚克力发光字。" },
+            { name: "流云飘带", desc: "抽象飘带造型，轻质PVC立体雕刻红色渐变叠加金色描边，云头托起主题字板，大面积天空留白。" },
+            { name: "如意连环", desc: "三块大小不一的如意形底板横向错落，每块UV打印组合图案，中央最大板上嵌黄铜主题字，底板间金色链条衔接。" },
+            { name: "编钟古韵", desc: "多个编钟形板横向悬挂，钟面浮雕吉祥纹样，钟钮装饰祥云，背景深蓝纯色，暖黄灯光聚焦主题。" },
+            { name: "龙凤呈祥", desc: "金色瑞兽与红色神鸟浮雕长卷横跨，神兽蜿蜒环绕，中心宝珠替换为发光主题字，宝蓝底板衬托。" },
+            { name: "纹样织锦", desc: "多种传统纹样组成横向连续装饰带，每层色彩由深至浅渐变，中央镶嵌木质描金牌匾。" },
+            { name: "书卷吉祥", desc: "两侧书卷叠放造型，书卷书写吉祥诗句与图案，中央匾额高悬主题，下方点缀穗子。" },
+            { name: "花团锦簇", desc: "数百朵花卉造型模块密拼构成花墙，花朵间点缀小品，中心花朵颜色自然形成主题字剪影。" },
+            { name: "折扇宏开", desc: "巨型折扇完全打开横向布景，金色不锈钢扇骨，红色丝印扇面印纹样，扇柄立体主题字。" },
+            { name: "皮影叙事", desc: "传统皮影戏元素，分层仿牛皮板切割故事场景，横向连续，背光处理，中央主题如皮影幕布。" },
+            { name: "月洞穿景", desc: "多个圆形月洞门并排，青砖纹饰边框，洞内KT板营造深远景致，中间门洞悬挂主题发光字。" },
+            { name: "聚宝盆溢", desc: "横向拉长聚宝盆造型，盆内溢出吉祥宝物，盆壁浮雕纹样，盆沿正中立主题牌。" },
+            { name: "鱼跃龙门", desc: "波浪纹与锦鲤跃动图案，蓝绿调海浪中锦鲤化龙，浪尖点缀纹样，主题字立于浪花之上。" },
+            { name: "中国结艺", desc: "盘长结为中心向两侧延伸结饰，红色亚克力管制作，中间结内嵌入主题字，米白绢布背景。" },
+            { name: "飞檐翘角", desc: "仿古建筑屋檐斗拱横向延展，檐下悬挂风铃，檐板彩绘纹样，中部匾额悬挂主题。" },
+            { name: "屏风叠翠", desc: "八块独立屏风板横向拼接轻微旋转，屏风面金箔描边绘制纹样，正中两块打开露出主题立体字。" },
+            { name: "剪纸层叠", desc: "传统剪纸叠加效果，多层红色镂空PVC板，首层窗花，二层纹样，三层发光底板，主题镂空发光。" }
+        ];
+        
+        const prompts = designThemes.map((theme, idx) => {
+            return `【${String(idx+1).padStart(2,'0')} ${theme.name}】正立面视角横向超宽美陈装置，${dims}，构图居中偏下留白≥30%。${theme.desc}${descStr}。画面具有明确视觉锚点适合打卡拍照，写实3D效果图，16:9画幅，8k，正面完整展示，无透视变形。`;
+        });
+        return { prompts, designs: designThemes };
     }
+    
     function renderPrompts(prompts, designs) {
         if(!prompts.length){ promptsListDiv.innerHTML='<div class="prompt-item">生成失败</div>'; return; }
         let html='';
