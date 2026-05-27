@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>商业美陈AI提示词 · 设计总监版 | 自由多选·无默认强加</title>
+    <title>商业美陈AI提示词 · 设计总监版 | 严格无默认</title>
     <style>
         :root {
             --bg: #1a1a1a;
@@ -69,7 +69,7 @@
             border: 1px solid rgba(201, 164, 92, 0.35); 
             white-space: nowrap; 
         }
-        /* 优化项目描述图框：更精致 */
+        /* 优化项目描述图框 */
         .project-desc-frame {
             background: rgba(20, 18, 14, 0.75);
             backdrop-filter: blur(8px);
@@ -187,7 +187,7 @@
         <div class="output-section">
             <div class="output-header"><h2>🎐 AI绘画提示词</h2><span class="badge" id="countDisplay">0/20</span></div>
             <div class="prompts-grid" id="promptsList"></div>
-            <div class="footer-note">⚡ 每组独立设计 · 仅输出已选择的板块 · 20组提示词内容完全不重复</div>
+            <div class="footer-note">⚡ 每组独立设计 · 仅输出已选择的板块 · 无任何预设描述</div>
             <div class="extra-output" id="extraOutput"><h4>📋 批量施工摘要</h4><p id="extraContent"></p></div>
         </div>
     </div>
@@ -206,7 +206,7 @@
         "科技未来": ["科技线条","数据流","光纤灯","几何矩阵","发光圆环","悬浮立方体","AI芯片纹理","星际轨道","能量核心","机械结构","镭射镜面","全息屏","数字粒子","激光矩阵"],
         "艺术装置": ["镜面不锈钢","气膜装置","悬浮雕塑","几何艺术体","动态风车","风动装置","镜面球","光影雕塑","巨型字母","艺术拱门","异形结构","参数化曲面"]
     };
-    // 节日元素映射（完整版）
+    // 节日元素映射
     const festivalElementsMap = {
         "春节": ["福字","中国结","灯笼","红包","金元宝","铜钱","祥云","牡丹","烟花","舞狮","舞龙","财神","鞭炮","梅花","窗花","宫灯","灯笼长廊","年兽","锦鲤","金龙","祈福树","春联","剪纸","如意","金扇","国潮纹样","红绸","金色波浪纹","鼓","戏曲元素","祥云拱门","灯海","新年IP","醒狮装置","金色麦穗","稻穗","发财树","龙凤","玉佩","琉璃球","流苏","金色屏风","古建筑屋檐","城门楼","金色卷轴","国风市集","烟火艺术装置"],
         "元宵节": ["花灯","鱼灯","兔子灯","宫灯","荷花灯","灯谜","月亮","玉兔","烟火","灯海","灯笼矩阵","古风长街","光影长廊","星空灯","祈愿牌","河灯","水纹","传统窗棂","彩灯树","福袋","锦鲤灯","古风桥梁","灯塔","月宫","桂花树","团圆餐桌","暖黄色光源","国潮插画","发光兔子","古建筑","汉服人物","彩色灯串","琉璃灯","诗词灯牌"],
@@ -235,9 +235,9 @@
     const festivalList = ["春节","元宵节","清明节","端午节","七夕节","中秋节","重阳节","冬至","国庆节","圣诞节","万圣节","情人节","妇女节/女神节","儿童节","毕业季","618","双11","双12","店庆","开业庆典","音乐节","电竞节","文旅灯会"];
     
     let selectedElementsSet = new Set();
-    let selectedFestivalsSet = new Set();  // 多选节日
+    let selectedFestivalsSet = new Set();
 
-    // 色彩、材质等选项列表...
+    // 其他选项列表
     const colorFullList = [
         "中国红","帝王黄","宝石蓝","孔雀绿","翡翠绿","松石绿","深海蓝","星空黑","珍珠白","奶油白","雾霾灰","银灰色","香槟金","古铜金","玫瑰金","哑光黑",
         "红金配色","黑金配色","朱砂红+鎏金","中国红+祥云金","故宫红+琉璃黄","赤金色","龙鳞金","宫廷蓝金","墨绿色+古金","丹霞橙+金",
@@ -438,7 +438,6 @@
     function updateProjectDescDisplay() {
         let desc = projectDescInput.value.trim() || '美陈古月智能体';
         frameProjectDesc.textContent = desc;
-        // 主标题不再随项目描述更改，保持固定
     }
     projectDescInput.addEventListener('input', updateProjectDescDisplay);
     function syncSize(source) { if(!lockRatioCheck.checked) return; let w=parseFloat(widthInput.value), h=parseFloat(heightInput.value); if(source==='width'&&!isNaN(w)) heightInput.value=(w/1.777).toFixed(2); else if(source==='height'&&!isNaN(h)) widthInput.value=(h*1.777).toFixed(1); }
@@ -448,9 +447,9 @@
     async function performCopy(text) { try { await navigator.clipboard.writeText(text); return true; } catch(e) { try { const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); return true; } catch(err){ return false; } } }
     function setupCopyButtons() { document.querySelectorAll('.copy-btn').forEach(btn => { const newBtn=btn.cloneNode(true); btn.parentNode.replaceChild(newBtn,btn); newBtn.addEventListener('click',async function(e){ e.preventDefault(); const idx=parseInt(this.dataset.index); if(isNaN(idx)||idx<0||idx>=currentPrompts.length){ alert('请重新生成'); return; } const text=currentPrompts[idx]; this.disabled=true; const orig=this.innerHTML; const ok=await performCopy(text); if(ok){ this.innerHTML='✓ 已复制'; this.classList.add('copied'); setTimeout(()=>{ this.innerHTML=orig; this.classList.remove('copied'); this.disabled=false; },2000); } else { this.innerHTML='📋 手动复制'; setTimeout(()=>{ this.innerHTML=orig; this.disabled=false; },2000); } }); }); }
     
-    // 生成20组完全不重复的提示词
+    // 生成20组完全不重复的提示词，仅包含用户选择的参数，无任何预设造型/材质/色彩等
     function generatePrompts(p) {
-        const { projectDesc, userW, userH } = p;
+        const { userW, userH } = p;
         const elemArr = Array.from(selectedElementsSet);
         const bgArr = Array.from(selectedVenueSet);
         
@@ -482,34 +481,18 @@
         const dims = `装置总宽度${fW}米，高度${fH}米，16:9比例`;
         const descStr = parts.length ? `，${parts.join('，')}` : '';
         
-        // 20个不同的设计主题，确保每组内容完全不重复
-        const designThemes = [
-            { name: "牌楼迎祥", desc: "仿古牌楼造型，八根红色亚克力圆柱横向排列，柱身浮雕吉祥纹样，横梁金色镂空板，中央鎏金牌匾悬嵌主题，地面圆形镜面地毯倒映暖光。" },
-            { name: "画卷纳福", desc: "巨型画卷横向展开，两端立体祥云泡沫雕塑，画卷表面满印吉祥图案，画心凹入安装亚克力发光字，背景留白米灰色。" },
-            { name: "宫灯连廊", desc: "十盏传统宫灯横向连排，灯面镂空祥云纹样，灯内暖光透出，灯间红色绸带相连，中央放大宫灯突出主题。" },
-            { name: "窗棂格韵", desc: "整面海棠纹窗棂格栅横向铺满，深红木质格栅间贴金箔纹饰，中心留白区域安装亚克力发光字。" },
-            { name: "流云飘带", desc: "抽象飘带造型，轻质PVC立体雕刻红色渐变叠加金色描边，云头托起主题字板，大面积天空留白。" },
-            { name: "如意连环", desc: "三块大小不一的如意形底板横向错落，每块UV打印组合图案，中央最大板上嵌黄铜主题字，底板间金色链条衔接。" },
-            { name: "编钟古韵", desc: "多个编钟形板横向悬挂，钟面浮雕吉祥纹样，钟钮装饰祥云，背景深蓝纯色，暖黄灯光聚焦主题。" },
-            { name: "龙凤呈祥", desc: "金色瑞兽与红色神鸟浮雕长卷横跨，神兽蜿蜒环绕，中心宝珠替换为发光主题字，宝蓝底板衬托。" },
-            { name: "纹样织锦", desc: "多种传统纹样组成横向连续装饰带，每层色彩由深至浅渐变，中央镶嵌木质描金牌匾。" },
-            { name: "书卷吉祥", desc: "两侧书卷叠放造型，书卷书写吉祥诗句与图案，中央匾额高悬主题，下方点缀穗子。" },
-            { name: "花团锦簇", desc: "数百朵花卉造型模块密拼构成花墙，花朵间点缀小品，中心花朵颜色自然形成主题字剪影。" },
-            { name: "折扇宏开", desc: "巨型折扇完全打开横向布景，金色不锈钢扇骨，红色丝印扇面印纹样，扇柄立体主题字。" },
-            { name: "皮影叙事", desc: "传统皮影戏元素，分层仿牛皮板切割故事场景，横向连续，背光处理，中央主题如皮影幕布。" },
-            { name: "月洞穿景", desc: "多个圆形月洞门并排，青砖纹饰边框，洞内KT板营造深远景致，中间门洞悬挂主题发光字。" },
-            { name: "聚宝盆溢", desc: "横向拉长聚宝盆造型，盆内溢出吉祥宝物，盆壁浮雕纹样，盆沿正中立主题牌。" },
-            { name: "鱼跃龙门", desc: "波浪纹与锦鲤跃动图案，蓝绿调海浪中锦鲤化龙，浪尖点缀纹样，主题字立于浪花之上。" },
-            { name: "中国结艺", desc: "盘长结为中心向两侧延伸结饰，红色亚克力管制作，中间结内嵌入主题字，米白绢布背景。" },
-            { name: "飞檐翘角", desc: "仿古建筑屋檐斗拱横向延展，檐下悬挂风铃，檐板彩绘纹样，中部匾额悬挂主题。" },
-            { name: "屏风叠翠", desc: "八块独立屏风板横向拼接轻微旋转，屏风面金箔描边绘制纹样，正中两块打开露出主题立体字。" },
-            { name: "剪纸层叠", desc: "传统剪纸叠加效果，多层红色镂空PVC板，首层窗花，二层纹样，三层发光底板，主题镂空发光。" }
+        // 20个不同的方案名称（确保每组有不同标识）
+        const themeNames = [
+            "牌楼迎祥", "画卷纳福", "宫灯连廊", "窗棂格韵", "流云飘带",
+            "如意连环", "编钟古韵", "龙凤呈祥", "纹样织锦", "书卷吉祥",
+            "花团锦簇", "折扇宏开", "皮影叙事", "月洞穿景", "聚宝盆溢",
+            "鱼跃龙门", "中国结艺", "飞檐翘角", "屏风叠翠", "剪纸层叠"
         ];
         
-        const prompts = designThemes.map((theme, idx) => {
-            return `【${String(idx+1).padStart(2,'0')} ${theme.name}】正立面视角横向超宽美陈装置，${dims}，构图居中偏下留白≥30%。${theme.desc}${descStr}。画面具有明确视觉锚点适合打卡拍照，写实3D效果图，16:9画幅，8k，正面完整展示，无透视变形。`;
+        const prompts = themeNames.map((name, idx) => {
+            return `【${String(idx+1).padStart(2,'0')} ${name}】正立面视角横向超宽美陈装置，${dims}，构图居中偏下留白≥30%${descStr}。画面具有明确视觉锚点适合打卡拍照，写实3D效果图，16:9画幅，8k，正面完整展示，无透视变形。`;
         });
-        return { prompts, designs: designThemes };
+        return { prompts, designs: themeNames.map(n => ({ name: n })) };
     }
     
     function renderPrompts(prompts, designs) {
@@ -528,7 +511,7 @@
         extraContent.innerHTML = `📊 已选板块统计：${Object.entries(selectedCount).filter(([k,v])=>v>0).map(([k,v])=>`${k}(${v})`).join(' · ') || '无任何选择，仅输出基础框架'}<br>📝 项目描述：${projectDescInput.value}<br>📐 尺寸：${widthInput.value}×${heightInput.value}米`;
         extraOutput.style.display='block';
     }
-    function handleGenerate() { setLoading(); setTimeout(()=>{ const result=generatePrompts({ projectDesc:projectDescInput.value.trim()||'美陈古月智能体', userW:parseFloat(widthInput.value), userH:parseFloat(heightInput.value) }); currentPrompts=result.prompts; renderPrompts(result.prompts,result.designs); },150); }
+    function handleGenerate() { setLoading(); setTimeout(()=>{ const result=generatePrompts({ userW:parseFloat(widthInput.value), userH:parseFloat(heightInput.value) }); currentPrompts=result.prompts; renderPrompts(result.prompts,result.designs); },150); }
     generateBtn.addEventListener('click', handleGenerate);
     document.getElementById('clearElemBtn').addEventListener('click',()=>{ selectedElementsSet.clear(); renderCoreElements(); updateElemDisplay(); });
     function init() { updateProjectDescDisplay(); renderAll(); setupCollapse('materialHeader','materialBody'); setupCollapse('lightHeader','lightBody'); setupCollapse('advancedHeader','advancedBody'); document.getElementById('materialBody').classList.add('expanded'); document.getElementById('materialHeader').classList.add('open'); setTimeout(handleGenerate,300); }
