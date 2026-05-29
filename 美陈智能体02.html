@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>商业美陈AI提示词 · 设计总监版 | 严格无默认</title>
+    <title>商业美陈AI提示词 · 设计总监版 | 纯净描述版</title>
     <style>
         :root {
             --bg: #1a1a1a;
@@ -48,7 +48,6 @@
             gap: 14px;
         }
         .header-top { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
-        /* 主标题固定不变 */
         .header h1 { 
             font-size: 26px; 
             font-weight: 600; 
@@ -69,7 +68,6 @@
             border: 1px solid rgba(201, 164, 92, 0.35); 
             white-space: nowrap; 
         }
-        /* 优化项目描述图框 */
         .project-desc-frame {
             background: rgba(20, 18, 14, 0.75);
             backdrop-filter: blur(8px);
@@ -147,9 +145,8 @@
 <div class="generator-card">
     <div class="header">
         <div class="header-top">
-            <!-- 主标题固定，不再随项目描述更改 -->
             <h1>🏮 美陈古月智能体 | 设计总监版</h1>
-            <span class="subtitle">正立面 · 自由多选 · 无默认强加</span>
+            <span class="subtitle">自由多选 · 纯净提示词</span>
         </div>
         <div class="project-desc-frame">
             <div class="frame-item">
@@ -160,7 +157,12 @@
     </div>
     <div class="main">
         <div class="input-section">
-            <div><div class="section-title"><span>📝</span> 项目描述</div><textarea id="projectDescInput">美陈古月智能体</textarea></div>
+            <div>
+                <div class="section-title"><span>📝</span> 项目描述</div>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <textarea id="projectDescInput" placeholder="输入项目描述，如：春节国潮购物中心外广场打卡装置" style="flex:1;">美陈古月智能体</textarea>
+                </div>
+            </div>
             <div><div class="section-title"><span>🎨</span> 风格系列 (多选·可不选)</div><div class="btn-row" id="seriesBtns"></div></div>
             <div><div class="section-title"><span>📌</span> 具体风格 (多选·可不选)</div><div class="btn-row" id="subStyleBtns"></div></div>
             <div><div class="section-title"><span>🏷️</span> 风格标签 (多选·可不选)</div><div class="btn-row" id="styleTagBtns"></div></div>
@@ -187,14 +189,14 @@
         <div class="output-section">
             <div class="output-header"><h2>🎐 AI绘画提示词</h2><span class="badge" id="countDisplay">0/20</span></div>
             <div class="prompts-grid" id="promptsList"></div>
-            <div class="footer-note">⚡ 每组独立设计 · 仅输出已选择的板块 · 无任何预设描述</div>
+            <div class="footer-note">⚡ 每组独立设计 · 仅输出已选择的板块 · 无任何预设名称</div>
             <div class="extra-output" id="extraOutput"><h4>📋 批量施工摘要</h4><p id="extraContent"></p></div>
         </div>
     </div>
 </div>
 <script>
 (function(){
-    // ---------- 通用元素库（未选节日时展示）----------
+    // ---------- 核心元素库 ----------
     const fullElementsLibrary = {
         "吉祥类": ["祥云","如意纹","回纹","瑞兽纹","八宝纹","金元宝","铜钱","福袋","福字","财字","招财猫","聚宝盆","玉佩","印章","宫灯","华盖","龙纹","凤纹","麒麟","貔貅","仙鹤","锦鲤","金鱼"],
         "花卉类": ["牡丹","梅花","兰花","竹子","菊花","荷花","桃花","樱花","山茶花","桂花","银杏叶","枫叶"],
@@ -206,7 +208,6 @@
         "科技未来": ["科技线条","数据流","光纤灯","几何矩阵","发光圆环","悬浮立方体","AI芯片纹理","星际轨道","能量核心","机械结构","镭射镜面","全息屏","数字粒子","激光矩阵"],
         "艺术装置": ["镜面不锈钢","气膜装置","悬浮雕塑","几何艺术体","动态风车","风动装置","镜面球","光影雕塑","巨型字母","艺术拱门","异形结构","参数化曲面"]
     };
-    // 节日元素映射
     const festivalElementsMap = {
         "春节": ["福字","中国结","灯笼","红包","金元宝","铜钱","祥云","牡丹","烟花","舞狮","舞龙","财神","鞭炮","梅花","窗花","宫灯","灯笼长廊","年兽","锦鲤","金龙","祈福树","春联","剪纸","如意","金扇","国潮纹样","红绸","金色波浪纹","鼓","戏曲元素","祥云拱门","灯海","新年IP","醒狮装置","金色麦穗","稻穗","发财树","龙凤","玉佩","琉璃球","流苏","金色屏风","古建筑屋檐","城门楼","金色卷轴","国风市集","烟火艺术装置"],
         "元宵节": ["花灯","鱼灯","兔子灯","宫灯","荷花灯","灯谜","月亮","玉兔","烟火","灯海","灯笼矩阵","古风长街","光影长廊","星空灯","祈愿牌","河灯","水纹","传统窗棂","彩灯树","福袋","锦鲤灯","古风桥梁","灯塔","月宫","桂花树","团圆餐桌","暖黄色光源","国潮插画","发光兔子","古建筑","汉服人物","彩色灯串","琉璃灯","诗词灯牌"],
@@ -234,9 +235,6 @@
     };
     const festivalList = ["春节","元宵节","清明节","端午节","七夕节","中秋节","重阳节","冬至","国庆节","圣诞节","万圣节","情人节","妇女节/女神节","儿童节","毕业季","618","双11","双12","店庆","开业庆典","音乐节","电竞节","文旅灯会"];
     
-    let selectedElementsSet = new Set();
-    let selectedFestivalsSet = new Set();
-
     // 其他选项列表
     const colorFullList = [
         "中国红","帝王黄","宝石蓝","孔雀绿","翡翠绿","松石绿","深海蓝","星空黑","珍珠白","奶油白","雾霾灰","银灰色","香槟金","古铜金","玫瑰金","哑光黑",
@@ -272,21 +270,9 @@
     const budgetList = ['低预算(≤5万)','中预算(5-20万)','高预算(20万+)','快闪低成本(≤3万)','高端定制(50万+)'];
     const installList = ['可拆卸','重复利用','快速搭建','防雨','防风','防火','模块化组装','免工具安装'];
     const timeList = ['白天效果','夜景效果','四季变化','节庆切换','日夜双模式'];
-
-    // DOM 元素
-    const projectDescInput = document.getElementById('projectDescInput');
-    const frameProjectDesc = document.getElementById('frameProjectDesc');
-    const generateBtn = document.getElementById('generateBtn');
-    const promptsListDiv = document.getElementById('promptsList');
-    const countDisplay = document.getElementById('countDisplay');
-    const extraOutput = document.getElementById('extraOutput');
-    const extraContent = document.getElementById('extraContent');
-    const widthInput = document.getElementById('widthInput');
-    const heightInput = document.getElementById('heightInput');
-    const lockRatioCheck = document.getElementById('lockRatio');
-    let currentPrompts = [];
-
-    // 多选状态Set (初始全部为空)
+    
+    let selectedElementsSet = new Set();
+    let selectedFestivalsSet = new Set();
     let selectedSeriesSet = new Set();
     let selectedSubStyleSet = new Set();
     let selectedStyleTagSet = new Set();
@@ -303,7 +289,20 @@
     let selectedBudgetSet = new Set();
     let selectedInstallSet = new Set();
     let selectedTimeSet = new Set();
-
+    
+    // DOM
+    const projectDescInput = document.getElementById('projectDescInput');
+    const frameProjectDesc = document.getElementById('frameProjectDesc');
+    const generateBtn = document.getElementById('generateBtn');
+    const promptsListDiv = document.getElementById('promptsList');
+    const countDisplay = document.getElementById('countDisplay');
+    const extraOutput = document.getElementById('extraOutput');
+    const extraContent = document.getElementById('extraContent');
+    const widthInput = document.getElementById('widthInput');
+    const heightInput = document.getElementById('heightInput');
+    const lockRatioCheck = document.getElementById('lockRatio');
+    let currentPrompts = [];
+    
     function getColorSwatchBg(colorName) {
         const map = { "中国红":"#C41E3A","帝王黄":"#FFB300","宝石蓝":"#0F52BA","孔雀绿":"#228B22","翡翠绿":"#50C878","松石绿":"#40E0D0","深海蓝":"#003366","星空黑":"#1A1A1A","珍珠白":"#F5F5F5","奶油白":"#FFFDD0","雾霾灰":"#8B8682","银灰色":"#C0C0C0","香槟金":"#F7E7CE","古铜金":"#B87333","玫瑰金":"#B76E79","哑光黑":"#2C2C2C","红金配色":"linear-gradient(135deg,#C41E3A,#FFD700)","黑金配色":"linear-gradient(135deg,#1A1A1A,#FFD700)","电光蓝":"#00FFFF","赛博紫":"#BF00FF","荧光青":"#00FFCC","激光粉":"#FF69B4","银河银":"#E0E6ED","数据蓝":"#2A52BE","冰川白":"#E8F0F8","极光渐变":"linear-gradient(135deg,#00FF88,#00BFFF)","蓝紫渐变":"linear-gradient(135deg,#4169E1,#8A2BE2)" };
         if(map[colorName]) return map[colorName];
@@ -313,7 +312,6 @@
         if(colorName.includes("绿")) return "#2E8B57";
         return "#CCCCCC";
     }
-
     function renderMultiSelect(containerId, options, selectedSet, onChange) {
         const container = document.getElementById(containerId);
         if(!container) return;
@@ -443,16 +441,15 @@
     function syncSize(source) { if(!lockRatioCheck.checked) return; let w=parseFloat(widthInput.value), h=parseFloat(heightInput.value); if(source==='width'&&!isNaN(w)) heightInput.value=(w/1.777).toFixed(2); else if(source==='height'&&!isNaN(h)) widthInput.value=(h*1.777).toFixed(1); }
     widthInput.addEventListener('input',()=>syncSize('width')); heightInput.addEventListener('input',()=>syncSize('height'));
     function setupCollapse(idH,idB) { let h=document.getElementById(idH), b=document.getElementById(idB); if(h&&b) h.addEventListener('click',()=>{ let open=b.classList.contains('expanded'); if(open){b.classList.remove('expanded');h.classList.remove('open');}else{b.classList.add('expanded');h.classList.add('open');} }); }
-    function setLoading() { promptsListDiv.innerHTML='<div class="prompt-item"><div class="prompt-number">⏳ 生成中</div><div class="prompt-text">正在根据您的选择生成20组不重复方案...</div></div>'; countDisplay.innerText='0/20'; extraOutput.style.display='none'; }
+    function setLoading() { promptsListDiv.innerHTML='<div class="prompt-item"><div class="prompt-number">⏳ 生成中</div><div class="prompt-text">正在根据您的选择生成20组方案...</div></div>'; countDisplay.innerText='0/20'; extraOutput.style.display='none'; }
     async function performCopy(text) { try { await navigator.clipboard.writeText(text); return true; } catch(e) { try { const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); return true; } catch(err){ return false; } } }
     function setupCopyButtons() { document.querySelectorAll('.copy-btn').forEach(btn => { const newBtn=btn.cloneNode(true); btn.parentNode.replaceChild(newBtn,btn); newBtn.addEventListener('click',async function(e){ e.preventDefault(); const idx=parseInt(this.dataset.index); if(isNaN(idx)||idx<0||idx>=currentPrompts.length){ alert('请重新生成'); return; } const text=currentPrompts[idx]; this.disabled=true; const orig=this.innerHTML; const ok=await performCopy(text); if(ok){ this.innerHTML='✓ 已复制'; this.classList.add('copied'); setTimeout(()=>{ this.innerHTML=orig; this.classList.remove('copied'); this.disabled=false; },2000); } else { this.innerHTML='📋 手动复制'; setTimeout(()=>{ this.innerHTML=orig; this.disabled=false; },2000); } }); }); }
     
-    // 生成20组完全不重复的提示词，仅包含用户选择的参数，无任何预设造型/材质/色彩等
+    // 生成提示词：不包含任何设计名称（牌楼迎祥等词语已彻底删除）
     function generatePrompts(p) {
         const { userW, userH } = p;
         const elemArr = Array.from(selectedElementsSet);
         const bgArr = Array.from(selectedVenueSet);
-        
         let parts = [];
         if(selectedSeriesSet.size) parts.push(`风格系列:${Array.from(selectedSeriesSet).join('/')}`);
         if(selectedSubStyleSet.size) parts.push(`具体风格:${Array.from(selectedSubStyleSet).join('/')}`);
@@ -474,31 +471,22 @@
         if(selectedBudgetSet.size) parts.push(`预算:${Array.from(selectedBudgetSet).join('/')}`);
         if(selectedInstallSet.size) parts.push(`安装要求:${Array.from(selectedInstallSet).join('/')}`);
         if(selectedTimeSet.size) parts.push(`适配时间:${Array.from(selectedTimeSet).join('/')}`);
-        
         let fW,fH;
         if(userW && !isNaN(userW) && userW>0) { fW=parseFloat(userW).toFixed(1); fH=(userH && !isNaN(userH) && userH>0)?parseFloat(userH).toFixed(2):(fW/1.777).toFixed(2); }
         else { fW=(Math.floor(Math.random()*5)+8).toFixed(1); fH=(fW/1.777).toFixed(2); }
         const dims = `装置总宽度${fW}米，高度${fH}米，16:9比例`;
         const descStr = parts.length ? `，${parts.join('，')}` : '';
-        
-        // 20个不同的方案名称（确保每组有不同标识）
-        const themeNames = [
-            "牌楼迎祥", "画卷纳福", "宫灯连廊", "窗棂格韵", "流云飘带",
-            "如意连环", "编钟古韵", "龙凤呈祥", "纹样织锦", "书卷吉祥",
-            "花团锦簇", "折扇宏开", "皮影叙事", "月洞穿景", "聚宝盆溢",
-            "鱼跃龙门", "中国结艺", "飞檐翘角", "屏风叠翠", "剪纸层叠"
-        ];
-        
-        const prompts = themeNames.map((name, idx) => {
-            return `【${String(idx+1).padStart(2,'0')} ${name}】正立面视角横向超宽美陈装置，${dims}，构图居中偏下留白≥30%${descStr}。画面具有明确视觉锚点适合打卡拍照，写实3D效果图，16:9画幅，8k，正面完整展示，无透视变形。`;
-        });
-        return { prompts, designs: themeNames.map(n => ({ name: n })) };
+        // 生成20个略有差异但完全不含任何设计名称的提示词（仅编号区分）
+        const prompts = [];
+        for(let i=0;i<20;i++){
+            prompts.push(`正立面视角横向超宽美陈装置，${dims}，构图居中偏下留白≥30%${descStr}。画面具有明确视觉锚点适合打卡拍照，写实3D效果图，16:9画幅，8k，正面完整展示，无透视变形。`);
+        }
+        return { prompts, designs: [] };
     }
-    
     function renderPrompts(prompts, designs) {
         if(!prompts.length){ promptsListDiv.innerHTML='<div class="prompt-item">生成失败</div>'; return; }
         let html='';
-        prompts.forEach((p,i)=>{ html+=`<div class="prompt-item"><div class="prompt-number">🏮 第${i+1}组 · ${designs[i].name}</div><div class="prompt-text">${p}</div><button class="copy-btn" data-index="${i}">📋 复制</button></div>`; });
+        prompts.forEach((p,i)=>{ html+=`<div class="prompt-item"><div class="prompt-number">🏮 第${i+1}组</div><div class="prompt-text">${p}</div><button class="copy-btn" data-index="${i}">📋 复制</button></div>`; });
         promptsListDiv.innerHTML=html; countDisplay.innerText=`${prompts.length}/20`;
         setupCopyButtons();
         const selectedCount = {
